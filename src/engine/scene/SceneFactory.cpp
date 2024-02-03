@@ -3,6 +3,7 @@
 
 #include "SceneColor.h"
 #include "SceneCube.h"
+#include "SceneCamera.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -18,5 +19,11 @@ Scene* SceneFactory::CreateColorScene(const glm::vec3& pColor)
 Scene* SceneFactory::CreateCubeScene()
 {
     auto scene = new SceneCube();
+    return scene;
+}
+
+Scene* SceneFactory::CreateCameraScene()
+{
+    auto scene = new SceneCamera();
     return scene;
 }

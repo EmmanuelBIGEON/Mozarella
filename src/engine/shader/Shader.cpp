@@ -162,12 +162,12 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
     }
 }
 
-void Shader::UpdateNormalizerMatrix(const glm::mat4& normalizerMatrix)
+void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
 {
     if (shader_cube != nullptr)
     {
         shader_cube->Use();
-        shader_cube->SetMat4("normalizer", normalizerMatrix);
+        shader_cube->SetMat4("view", viewMatrix);
     }
     
 }

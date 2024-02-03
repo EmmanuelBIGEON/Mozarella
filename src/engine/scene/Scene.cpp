@@ -2,22 +2,34 @@
 
 #include <glad/glad.h>
 
-Scene::Scene()
+#include "Window.h"
+
+Scene::Scene() : _activeView(nullptr)
 {
 }
 
 Scene::~Scene()
 {
+    if(_slot) delete _slot;
 }
 
 void Scene::Add(View* pView)
 {
     _views.push_back(pView);
+    if(!_activeView) _activeView = pView;
 }
 
 void Scene::Connect(Window* window)
 {
-    // todo
+    // On forward les evenements vers la vue.
+    _slot = window->OnEvent.Connect([this](Event& event){
+        Process(event);
+    }); 
+}
+
+void Scene::Process(Event& event)
+{
+    // Do nothing.
 }
 
 void Scene::Render()

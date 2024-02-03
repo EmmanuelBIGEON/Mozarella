@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Event.h"
+
 class View
 {
     public:
@@ -7,4 +9,6 @@ class View
         virtual ~View();
 
         virtual bool Render();
+
+    private:
 };

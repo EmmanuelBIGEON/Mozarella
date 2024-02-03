@@ -26,8 +26,10 @@ set(SRCS
     src/engine/scene/SceneFactory.cpp
     src/engine/scene/implementations/SceneColor.cpp 
     src/engine/scene/implementations/SceneCube.cpp 
+    src/engine/scene/implementations/SceneCamera.cpp 
 
     src/engine/view/View.cpp 
+    src/engine/view/Camera.cpp 
     src/engine/view/ViewFactory.cpp
     src/engine/view/implementations/ColorView.cpp
     src/engine/view/implementations/Simple3DView.cpp

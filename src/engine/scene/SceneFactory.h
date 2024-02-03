@@ -10,4 +10,5 @@ class SceneFactory
         static Scene* CreateDefaultScene();
         static Scene* CreateColorScene(const glm::vec3& pColor);
         static Scene* CreateCubeScene();
+        static Scene* CreateCameraScene();
 };

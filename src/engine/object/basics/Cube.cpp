@@ -8,13 +8,19 @@
 #include "stb_image.h"
 
 
-Cube::Cube(const glm::vec3& position) : GraphicObject(), _position(position), _computed(false), _VAO(0), _VBO(0), _texture(0)
+Cube::Cube(const glm::vec3& position) : GraphicObject(), _position(position), _computed(false), _VAO(0), _VBO(0), _texture(0), _rotating(false) 
 {
 }
 
 Cube::~Cube()
 {
     delete _vertices;
+}
+
+
+void Cube::ToggleRotation()
+{
+    _rotating = !_rotating;
 }
 
 void Cube::Compute()
@@ -121,11 +127,14 @@ void Cube::Render()
     glBindTexture(GL_TEXTURE_2D, _texture);
     glBindVertexArray(_VAO);
     
-    glm::mat4 transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-    transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-    auto model = glm::rotate(_model, (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 1.0f));
+    if(_rotating)
+    {
+        auto model = glm::rotate(_model, (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 1.0f));
+        shader->SetMat4("model", model);
+    }else
+    {
+        shader->SetMat4("model", _model);
+    }
 
-    shader->SetMat4("transformation", transform);
-    shader->SetMat4("model", model);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

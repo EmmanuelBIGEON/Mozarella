@@ -32,6 +32,14 @@ enum MouseButton
     MOUSE_BUTTON_MIDDLE
 };
 
+enum Key
+{
+    Key_D = 68,
+    Key_S = 83,
+    Key_Q = 65,
+    Key_Z = 87
+};
+
 class Event
 {
     public:

@@ -31,7 +31,7 @@ class Shader
         static Shader* GetShader(ShaderID shader);
 
         static void UpdateProjectionMatrix(const glm::mat4& projectionMatrix);
-        static void UpdateNormalizerMatrix(const glm::mat4& normalizerMatrix);
+        static void UpdateViewMatrix(const glm::mat4& viewMatrix);
 
     protected:
 

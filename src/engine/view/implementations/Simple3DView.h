@@ -3,8 +3,9 @@
 #include <memory>
 #include <glm/ext.hpp>
 
-
 #include "View.h"
+#include "Event.h"
+#include "Camera.h"
 
 class GraphicContext;
 
@@ -16,6 +17,10 @@ class Simple3DView : public View
 
         virtual bool Render() override;
 
+        void EnableCamera();
+        void UpdateCamera(Event& event);
+        Camera* GetCamera();
+
         void SetContext(const std::shared_ptr<GraphicContext>& pContext);
         std::shared_ptr<GraphicContext> GetContext();
 
@@ -24,4 +29,7 @@ class Simple3DView : public View
 
         glm::mat4 _view;
         glm::mat4 _projection;
+
+        bool _cameraActive;
+        Camera* _camera;
 };

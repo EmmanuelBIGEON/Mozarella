@@ -23,6 +23,7 @@ bool longpress = false;
 double timeBetweenKeyPressMaxLong = 0.005;
 double lastMouseX = 0, lastMouseY = 0;
 std::set<int> holdedKeys = {};
+float lastFrame = 0.0f;
 
 Window::Window(const std::string& windowName, unsigned int width, unsigned int height) : _height(height), _width(width)
 {
@@ -76,6 +77,11 @@ bool Window::Render()
 {
     if(glfwWindowShouldClose(_window)) return false;
     Window::activeWindow = this;
+
+    float currentFrame = static_cast<float>(glfwGetTime());
+    frameDeltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
     
     if(_currentScene) _currentScene->Render();
 
@@ -99,6 +105,7 @@ void Window::GetSize(unsigned int* width, unsigned int* height)
 void Window::SetScene(Scene* pScene)
 {
     _currentScene = pScene;
+    _currentScene->Connect(this);
 }
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)

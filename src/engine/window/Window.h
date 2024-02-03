@@ -26,6 +26,9 @@ class Window
         Signal<Event&> OnEvent;
 
         static Window* activeWindow;
+        
+        // useful for the camera.
+        float frameDeltaTime;
 
     private: 
         unsigned int _width, _height;
