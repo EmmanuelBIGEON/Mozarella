@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Mozarella",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:/workspace/Mozarella/bin/Mozarella.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "C:/workspace/Mozarella/bin",
+            "environment": []
+        }
+    ]
+}

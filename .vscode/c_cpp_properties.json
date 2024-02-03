@@ -1,0 +1,22 @@
+{
+	"configurations": [
+		{
+			"name": "Mozarella",
+			"includePath": [
+				"${workspaceFolder}/**",
+				"${workspaceFolder}/src/engine/**",
+				"${workspaceFolder}/src/engine/common/**",
+				"${workspaceFolder}/src/engine/event/**",
+				"${workspaceFolder}/src/engine/shader/**",
+				"${workspaceFolder}/src/engine/object/**"
+
+			],
+			"windowsSdkVersion": "10.0.17763.0",
+			"compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC\\bin\\cl.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "windows-msvc-x64"
+		}
+	],
+	"version": 4
+}

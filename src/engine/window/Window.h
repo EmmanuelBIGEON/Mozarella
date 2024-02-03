@@ -1,0 +1,35 @@
+#pragma once
+
+#include <memory>
+#include <string>
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include "MozSignal.h"
+#include "Event.h"
+#include "Scene.h"
+
+
+class Window
+{
+    public:
+        Window(const std::string& windowName, unsigned int width, unsigned int height);
+        virtual ~Window();
+        static Window* Create(unsigned int width, unsigned int height);
+
+        bool Render();
+        void UpdateDataSize(unsigned int width, unsigned int height);
+        void GetSize(unsigned int* width, unsigned int* height);
+        void SetScene(Scene* pScene);
+
+        Signal<Event&> OnEvent;
+
+        static Window* activeWindow;
+
+    private: 
+        unsigned int _width, _height;
+        GLFWwindow* _window;
+        Scene* _currentScene;
+        
+};
