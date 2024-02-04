@@ -8,7 +8,8 @@
 #include "stb_image.h"
 
 
-Cube::Cube(const glm::vec3& position) : GraphicObject(), _position(position), _computed(false), _VAO(0), _VBO(0), _texture(0), _rotating(false) 
+Cube::Cube(const glm::vec3& position) : GraphicObject(), _position(position),
+_computed(false), _VAO(0), _VBO(0), _texture(0), _rotating(false) , _vertices(nullptr)
 {
 }
 
@@ -112,7 +113,7 @@ void Cube::Compute()
         std::cout << "Failed to load texture" << std::endl;
     }
     stbi_image_free(data);
-    auto shader = Shader::GetShader(SHADER_CUBE);
+    auto shader = Shader::GetShader(SHADER_BASE);
     shader->Use();
     shader->SetInt("texture1", 0);
 
@@ -121,7 +122,7 @@ void Cube::Compute()
 
 void Cube::Render()
 {
-    auto shader = Shader::GetShader(SHADER_CUBE);
+    auto shader = Shader::GetShader(SHADER_BASE);
     shader->Use();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _texture);

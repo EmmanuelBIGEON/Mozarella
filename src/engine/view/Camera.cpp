@@ -33,23 +33,31 @@ void Camera::Update(Event& event)
             KeyPressedEvent* keyPressedEvent = (KeyPressedEvent*)&event;
             if (keyPressedEvent->key == Key_Z)
                 ProcessKeyboard(FORWARD, Window::activeWindow->frameDeltaTime);
-            if (keyPressedEvent->key == Key_S)
+            else if (keyPressedEvent->key == Key_S)
                 ProcessKeyboard(BACKWARD, Window::activeWindow->frameDeltaTime);
-            if (keyPressedEvent->key == Key_Q)
+            else if (keyPressedEvent->key == Key_Q)
                 ProcessKeyboard(LEFT, Window::activeWindow->frameDeltaTime);
-            if (keyPressedEvent->key == Key_D)
+            else if (keyPressedEvent->key == Key_D)
                 ProcessKeyboard(RIGHT, Window::activeWindow->frameDeltaTime);
+            else if (keyPressedEvent->key == Key_Ctrl)
+                ProcessKeyboard(DOWN, Window::activeWindow->frameDeltaTime);
+            else if (keyPressedEvent->key == Key_Space)
+                ProcessKeyboard(UP, Window::activeWindow->frameDeltaTime);
         }else if(keyEvent->GetKeyType() == EventKeyType::EVENT_KEY_REPEATED)
         {
             KeyRepeatedEvent* keyRepeatedEvent = (KeyRepeatedEvent*)&event;
             if (keyRepeatedEvent->key == Key_Z)
                 ProcessKeyboard(FORWARD, Window::activeWindow->frameDeltaTime);
-            if (keyRepeatedEvent->key == Key_S)
+            else if (keyRepeatedEvent->key == Key_S)
                 ProcessKeyboard(BACKWARD, Window::activeWindow->frameDeltaTime);
-            if (keyRepeatedEvent->key == Key_Q)
+            else if (keyRepeatedEvent->key == Key_Q)
                 ProcessKeyboard(LEFT, Window::activeWindow->frameDeltaTime);
-            if (keyRepeatedEvent->key == Key_D)
+            else if (keyRepeatedEvent->key == Key_D)
                 ProcessKeyboard(RIGHT, Window::activeWindow->frameDeltaTime);
+            else if (keyRepeatedEvent->key == Key_Ctrl)
+                ProcessKeyboard(DOWN, Window::activeWindow->frameDeltaTime);
+            else if (keyRepeatedEvent->key == Key_Space)
+                ProcessKeyboard(UP, Window::activeWindow->frameDeltaTime);
         }
     }
 }

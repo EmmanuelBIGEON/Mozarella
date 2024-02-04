@@ -38,7 +38,9 @@ enum Key
     Key_D = 68,
     Key_S = 83,
     Key_Q = 65,
-    Key_Z = 87
+    Key_Z = 87,
+    Key_Space = 32,
+    Key_Ctrl = 341
 };
 
 class Event
@@ -50,7 +52,6 @@ class Event
         virtual EventType GetEventType() const { return EVENT_NONE;}
 
         EventType m_EventType;
-
 };
 
 class MouseEvent : public Event

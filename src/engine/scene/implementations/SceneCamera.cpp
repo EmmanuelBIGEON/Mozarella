@@ -14,6 +14,10 @@ SceneCamera::SceneCamera()
     cube->ToggleRotation();
     context->AddObject(cube);
 
+    // Add a plane.
+    auto plane = ObjectFactory::CreateRectangle();
+    context->AddObject(plane);
+
     // Add a camera to the scene.
     _myView->EnableCamera();
 
@@ -28,15 +32,14 @@ SceneCamera::~SceneCamera()
 void SceneCamera::Process(Event& event)
 {
     _myView->UpdateCamera(event);
-
-    std::cout << "iai" << std::endl;
+    
     if(event.GetEventType() == EventType::EVENT_KEY)
     {
         KeyEvent* keyEvent = (KeyEvent*)&event;
         if(keyEvent->GetKeyType() == EventKeyType::EVENT_KEY_PRESSED)
         {
             KeyPressedEvent* keyPressedEvent = (KeyPressedEvent*)&event;
-            std::cout << "key : " << keyPressedEvent->key << std::endl;
+            std::cout << "key : :  " << keyPressedEvent->key << std::endl;
         }
     }
 }

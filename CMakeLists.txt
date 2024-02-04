@@ -43,6 +43,7 @@ set(SRCS
     src/engine/object/GraphicObject.cpp 
     src/engine/object/ObjectFactory.cpp 
     src/engine/object/basics/Cube.cpp 
+    src/engine/object/basics/Rectangle.cpp 
 )
 
 project(Mozarella)
