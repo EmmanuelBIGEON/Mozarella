@@ -5,6 +5,8 @@
 
 #include "Shader.h"
 
+#include "Assets.h"
+
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -64,6 +66,7 @@ Window::Window(const std::string& windowName, unsigned int width, unsigned int h
     glEnable(GL_DEPTH_TEST);
 
     Shader::InitShaders();
+    Assets::LoadAssets(AssetType::AssetType_All);
 }
 
 Window::~Window()

@@ -5,6 +5,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Assets.h"
+
 
 Engine::Engine()
 {
@@ -52,6 +54,5 @@ bool Engine::Run()
 
 void Engine::Init()
 {
-  if (!glfwInit()){ std::cout << "Failed glfwInit" << std::endl; return; }
-
+    if (!glfwInit()){ std::cout << "Failed glfwInit" << std::endl; return; }
 }

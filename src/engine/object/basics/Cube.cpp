@@ -5,12 +5,14 @@
 #include <iostream>
 
 #include "Shader.h"
+#include "Assets.h"
 #include "stb_image.h"
 
 
 Cube::Cube(const glm::vec3& position) : GraphicObject(), _position(position),
 _computed(false), _VAO(0), _VBO(0), _texture(0), _rotating(false) , _vertices(nullptr)
 {
+    _textureName = assets::Texture::Texture_Cube;
 }
 
 Cube::~Cube()
@@ -22,6 +24,11 @@ Cube::~Cube()
 void Cube::ToggleRotation()
 {
     _rotating = !_rotating;
+}
+
+void Cube::SetTextureID(assets::Texture textureName)
+{
+    _textureName = textureName;
 }
 
 void Cube::Compute()
@@ -90,29 +97,6 @@ void Cube::Compute()
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    // load and create a texture 
-    glGenTextures(1, &_texture);
-    glBindTexture(GL_TEXTURE_2D, _texture);
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
-    int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    unsigned char *data = stbi_load("textures/awesomeface.png", &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
     auto shader = Shader::GetShader(SHADER_BASE);
     shader->Use();
     shader->SetInt("texture1", 0);
@@ -124,8 +108,8 @@ void Cube::Render()
 {
     auto shader = Shader::GetShader(SHADER_BASE);
     shader->Use();
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _texture);
+
+    Assets::Bind(_textureName, 0);
     glBindVertexArray(_VAO);
     
     if(_rotating)

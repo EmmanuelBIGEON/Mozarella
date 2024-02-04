@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 
 include_directories(
     src/engine
+    src/engine/assets
     src/engine/common
     src/engine/context
     src/engine/event
@@ -10,6 +11,7 @@ include_directories(
     src/engine/scene
     src/engine/scene/implementations
     src/engine/shader
+    src/engine/texture
     src/engine/view
     src/engine/view/implementations
     src/engine/window
@@ -19,6 +21,8 @@ include_directories(
 set(SRCS
     src/main.cpp
     src/glad.c
+
+    src/engine/assets/Assets.cpp
 
     src/engine/Engine.cpp
 
@@ -39,6 +43,8 @@ set(SRCS
     src/engine/context/GraphicContext.cpp 
     
     src/engine/shader/Shader.cpp
+    
+    src/engine/texture/Texture.cpp
 
     src/engine/object/GraphicObject.cpp 
     src/engine/object/ObjectFactory.cpp 
@@ -48,8 +54,8 @@ set(SRCS
 
 project(Mozarella)
 
-
 add_executable(Mozarella ${SRCS})
+target_compile_features(Mozarella PRIVATE cxx_std_17)
 
 target_link_libraries(Mozarella
     ${GLFW_DIR}/glfw3.lib
