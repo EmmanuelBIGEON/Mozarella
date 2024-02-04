@@ -18,6 +18,13 @@ _computed(false), _VAO(0), _VBO(0), _texture(0), _vertices(nullptr)
     _p4 = glm::vec3(position.x - tempW, position.y - tempH, position.z);
 }
 
+
+Rectangle::Rectangle(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const glm::vec3& p4) : GraphicObject(),  
+_p1(p1), _p2(p2), _p3(p3), _p4(p4),
+_computed(false), _VAO(0), _VBO(0), _texture(0), _vertices(nullptr)
+{
+}
+
 Rectangle::~Rectangle()
 {
 }

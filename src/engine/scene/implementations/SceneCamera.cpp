@@ -15,7 +15,11 @@ SceneCamera::SceneCamera()
     context->AddObject(cube);
 
     // Add a plane.
-    auto plane = ObjectFactory::CreateRectangle();
+    glm::vec3 p1 = glm::vec3(10.0f, -1.0f, 10.0f);
+    glm::vec3 p2 = glm::vec3(-10.0f, -1.0f, 10.0f);
+    glm::vec3 p3 = glm::vec3(-10.0f, -1.0f, -10.0f);
+    glm::vec3 p4 = glm::vec3(10.0f, -1.0f, -10.0f);
+    auto plane = ObjectFactory::CreateRectangle(p1, p2,  p3, p4);
     context->AddObject(plane);
 
     // Add a camera to the scene.
