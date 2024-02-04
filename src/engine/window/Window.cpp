@@ -19,13 +19,13 @@ bool keyhelddown = false;
 double timeBetweenKeyPress = 0;
 double timeBetweenKeyPressMax = 0.001;
 int rememberedKey = 0;
-bool longpress = false;
+bool longpress = true;
 double timeBetweenKeyPressMaxLong = 0.005;
 double lastMouseX = 0, lastMouseY = 0;
 std::set<int> holdedKeys = {};
 float lastFrame = 0.0f;
 
-Window::Window(const std::string& windowName, unsigned int width, unsigned int height) : _height(height), _width(width)
+Window::Window(const std::string& windowName, unsigned int width, unsigned int height) : _height(height), _width(width), frameDeltaTime(0)
 {
     Window::activeWindow = this;
     // Specify OpenGL version and other things needed before creating the window.
@@ -50,6 +50,9 @@ Window::Window(const std::string& windowName, unsigned int width, unsigned int h
     glfwSetCursorPosCallback(_window, mouse_callback);
     glfwSetMouseButtonCallback(_window, mouse_button_callback);
     glfwSetScrollCallback(_window, scroll_callback);
+    
+    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 
     // Initiliaze Glad to use OpenGL functions.
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){ std::cout << "Failed to initialize GLAD" << std::endl; return; }
@@ -82,6 +85,8 @@ bool Window::Render()
     frameDeltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
+    ProcessInputs();
+
     
     if(_currentScene) _currentScene->Render();
 
@@ -89,6 +94,17 @@ bool Window::Render()
     glfwPollEvents();
 
     return true;
+}
+
+void Window::ProcessInputs()
+{
+    // Only process keys for now.
+    for(const auto& key : holdedKeys)
+    {
+        KeyRepeatedEvent event(key);
+        Window::activeWindow->OnEvent.Emit(event);
+
+    }
 }
 
 void Window::UpdateDataSize(unsigned int width, unsigned int height)
@@ -116,10 +132,16 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
         
-    if(action == GLFW_PRESS)
+    if(action == GLFW_REPEAT)
+    {
+        KeyPressedEvent event(key);
+        Window::activeWindow->OnEvent.Emit(event);
+    }
+    else if(action == GLFW_PRESS)
     {
         KeyPressedEvent event(key);
         Window::activeWindow->OnEvent.Emit(event);

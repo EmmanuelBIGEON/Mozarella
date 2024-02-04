@@ -21,6 +21,7 @@ enum EventMouseType
 enum EventKeyType
 {
     EVENT_KEY_PRESSED,
+    EVENT_KEY_REPEATED,
     EVENT_KEY_RELEASED
 };
 
@@ -146,6 +147,13 @@ class KeyPressedEvent : public KeyEvent
     public:
         KeyPressedEvent(int input_key) : KeyEvent(input_key) { m_KeyType = EVENT_KEY_PRESSED; }
         virtual ~KeyPressedEvent() {}
+};
+
+class KeyRepeatedEvent : public KeyEvent
+{
+    public:
+        KeyRepeatedEvent(int input_key) : KeyEvent(input_key) { m_KeyType = EVENT_KEY_REPEATED; }
+        virtual ~KeyRepeatedEvent() {}
 };
 
 class KeyReleasedEvent : public KeyEvent

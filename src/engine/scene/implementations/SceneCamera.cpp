@@ -29,7 +29,7 @@ void SceneCamera::Process(Event& event)
 {
     _myView->UpdateCamera(event);
 
-    
+    std::cout << "iai" << std::endl;
     if(event.GetEventType() == EventType::EVENT_KEY)
     {
         KeyEvent* keyEvent = (KeyEvent*)&event;

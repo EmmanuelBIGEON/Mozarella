@@ -18,6 +18,7 @@ class Window
         virtual ~Window();
         static Window* Create(unsigned int width, unsigned int height);
 
+        void ProcessInputs();
         bool Render();
         void UpdateDataSize(unsigned int width, unsigned int height);
         void GetSize(unsigned int* width, unsigned int* height);
