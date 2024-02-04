@@ -12,7 +12,7 @@ int main(int argc, char** argv)
     Engine* mozarella = new Engine();
     mozarella->Init();
     
-    auto window = Window::Create(1000,800);
+    auto window = Window::Create(1400,1000);
     // auto scene = SceneFactory::CreateColorScene({1.0f, 0.0f, 0.0f});
     // auto scene = SceneFactory::CreateCubeScene();
     auto scene = SceneFactory::CreateCameraScene();

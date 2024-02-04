@@ -80,6 +80,8 @@ public:
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
+        if(!_freeViewEnabled) return;
+
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
 
@@ -127,6 +129,6 @@ private:
     // Used for computation of offset
     float _lastX;
     float _lastY;
-    bool _firstMouse = true;
+    bool _firstMouse = true, _freeViewEnabled = true;
     
 };

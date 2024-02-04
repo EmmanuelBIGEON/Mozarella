@@ -31,6 +31,7 @@ void Camera::Update(Event& event)
         if(keyEvent->GetKeyType() == EventKeyType::EVENT_KEY_PRESSED)
         {
             KeyPressedEvent* keyPressedEvent = (KeyPressedEvent*)&event;
+
             if (keyPressedEvent->key == Key_Z)
                 ProcessKeyboard(FORWARD, Window::activeWindow->frameDeltaTime);
             else if (keyPressedEvent->key == Key_S)
@@ -43,6 +44,12 @@ void Camera::Update(Event& event)
                 ProcessKeyboard(DOWN, Window::activeWindow->frameDeltaTime);
             else if (keyPressedEvent->key == Key_Space)
                 ProcessKeyboard(UP, Window::activeWindow->frameDeltaTime);
+            else if (keyPressedEvent->key == Key_F)
+            {
+                _freeViewEnabled = !_freeViewEnabled;
+                Window::activeWindow->SetCursorMode(_freeViewEnabled);
+            }
+
         }else if(keyEvent->GetKeyType() == EventKeyType::EVENT_KEY_REPEATED)
         {
             KeyRepeatedEvent* keyRepeatedEvent = (KeyRepeatedEvent*)&event;

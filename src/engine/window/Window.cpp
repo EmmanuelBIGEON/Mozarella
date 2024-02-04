@@ -7,6 +7,10 @@
 
 #include "Assets.h"
 
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -67,6 +71,15 @@ Window::Window(const std::string& windowName, unsigned int width, unsigned int h
 
     Shader::InitShaders();
     Assets::LoadAssets(AssetType::AssetType_All);
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    // Setup Platform/Renderer backends
+    ImGui_ImplGlfw_InitForOpenGL(_window, true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
+    ImGui_ImplOpenGL3_Init();
+
 }
 
 Window::~Window()
@@ -84,6 +97,13 @@ bool Window::Render()
     if(glfwWindowShouldClose(_window)) return false;
     Window::activeWindow = this;
 
+    glfwPollEvents();
+    
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    ImGui::ShowDemoWindow(); // Show demo window! :)
+
     float currentFrame = static_cast<float>(glfwGetTime());
     frameDeltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
@@ -93,8 +113,10 @@ bool Window::Render()
     
     if(_currentScene) _currentScene->Render();
 
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     glfwSwapBuffers(_window);
-    glfwPollEvents();
 
     return true;
 }
@@ -107,6 +129,17 @@ void Window::ProcessInputs()
         KeyRepeatedEvent event(key);
         Window::activeWindow->OnEvent.Emit(event);
 
+    }
+}
+
+void Window::SetCursorMode(bool mode)
+{
+    if(mode)
+    {
+        glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }else 
+    {
+        glfwSetInputMode(_window, GLFW_CURSOR,  GLFW_CURSOR_NORMAL);
     }
 }
 

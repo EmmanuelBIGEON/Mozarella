@@ -3,6 +3,8 @@
 #include <glm/ext.hpp>
 
 #include "GraphicObject.h"
+#include "Assets.h"
+
 
 class Rectangle : public GraphicObject 
 {
@@ -12,12 +14,16 @@ class Rectangle : public GraphicObject
         Rectangle(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const glm::vec3& p4);
         virtual ~Rectangle();
         
+        void SetTextureID(assets::Texture textureName);
+
         virtual void Compute() override;
         virtual void Render() override;
 
     private:
         glm::mat4 _model;
         glm::vec3 _p1, _p2, _p3, _p4;
+        
+        assets::Texture _textureName;
         
         bool _computed;
         

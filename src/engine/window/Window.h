@@ -24,6 +24,8 @@ class Window
         void GetSize(unsigned int* width, unsigned int* height);
         void SetScene(Scene* pScene);
 
+        void SetCursorMode(bool mode);
+
         Signal<Event&> OnEvent;
 
         static Window* activeWindow;

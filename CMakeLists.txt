@@ -15,6 +15,9 @@ include_directories(
     src/engine/view
     src/engine/view/implementations
     src/engine/window
+    
+    src/engine/imgui
+
     include
 )
 
@@ -52,9 +55,20 @@ set(SRCS
     src/engine/object/basics/Rectangle.cpp 
 )
 
+set(SRCS_IMGUI
+    src/engine/imgui/imgui.cpp
+    src/engine/imgui/imgui_draw.cpp
+    src/engine/imgui/imgui_demo.cpp
+    src/engine/imgui/imgui_tables.cpp
+    src/engine/imgui/imgui_widgets.cpp
+
+    src/engine/imgui/imgui_impl_glfw.cpp
+    src/engine/imgui/imgui_impl_opengl3.cpp # 3 ? 
+)
+
 project(Mozarella)
 
-add_executable(Mozarella ${SRCS})
+add_executable(Mozarella ${SRCS} ${SRCS_IMGUI})
 target_compile_features(Mozarella PRIVATE cxx_std_17)
 
 target_link_libraries(Mozarella

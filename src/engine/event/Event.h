@@ -36,6 +36,7 @@ enum MouseButton
 enum Key
 {
     Key_D = 68,
+    Key_F = 70,
     Key_S = 83,
     Key_Q = 65,
     Key_Z = 87,
