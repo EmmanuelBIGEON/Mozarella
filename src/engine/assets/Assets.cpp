@@ -51,7 +51,7 @@ bool Assets::LoadTextures()
 
     mapTextures[assets::Texture::Texture_None] = nullptr;
     mapTextures[assets::Texture::Texture_Cube] = Texture::Load(BuildTexturePath("awesomeface.png"));
-    mapTextures[assets::Texture::Texture_Cube2] = Texture::Load(BuildTexturePath("abstract-ink-alcohol.jpg"));
-    mapTextures[assets::Texture::Texture_Cube3] = Texture::Load(BuildTexturePath("oldwood.jpg"));
+    mapTextures[assets::Texture::Texture_Cube2] = Texture::Load(BuildTexturePath("abstract-ink-alcohol-min.jpg"));
+    mapTextures[assets::Texture::Texture_Cube3] = Texture::Load(BuildTexturePath("oldwood-min.jpg"));
     mapTextures[assets::Texture::Texture_Plane] = Texture::Load(BuildTexturePath("awesomeface.png"));
 }
