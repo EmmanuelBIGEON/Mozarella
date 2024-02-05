@@ -35,10 +35,11 @@ enum MouseButton
 
 enum Key
 {
+    Key_Q = 65, // A in qwerty..
     Key_D = 68,
     Key_F = 70,
     Key_S = 83,
-    Key_Q = 65,
+    Key_T = 84,
     Key_Z = 87,
     Key_Space = 32,
     Key_Ctrl = 341

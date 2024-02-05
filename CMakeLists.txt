@@ -5,6 +5,7 @@ include_directories(
     src/engine/assets
     src/engine/common
     src/engine/context
+    src/engine/editor
     src/engine/event
     src/engine/object
     src/engine/object/basics
@@ -24,10 +25,11 @@ include_directories(
 set(SRCS
     src/main.cpp
     src/glad.c
+    src/engine/Engine.cpp
 
     src/engine/assets/Assets.cpp
 
-    src/engine/Engine.cpp
+    src/engine/editor/QuickEditor.cpp
 
     src/engine/scene/Scene.cpp
     src/engine/scene/SceneFactory.cpp

@@ -4,7 +4,7 @@
 #include <set>
 
 #include "Shader.h"
-
+#include "QuickEditor.h"
 #include "Assets.h"
 
 #include "imgui.h"
@@ -99,10 +99,13 @@ bool Window::Render()
 
     glfwPollEvents();
     
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-    ImGui::ShowDemoWindow(); // Show demo window! :)
+    if(_editor)
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        QuickEditor::Display();
+    }
 
     float currentFrame = static_cast<float>(glfwGetTime());
     frameDeltaTime = currentFrame - lastFrame;
@@ -113,8 +116,11 @@ bool Window::Render()
     
     if(_currentScene) _currentScene->Render();
 
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    if(_editor)
+    {
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    }
 
     glfwSwapBuffers(_window);
 
@@ -130,6 +136,16 @@ void Window::ProcessInputs()
         Window::activeWindow->OnEvent.Emit(event);
 
     }
+}
+
+void Window::DisplayEditor(bool mode)
+{
+    _editor = mode;
+}
+
+void Window::ToggleEditor()
+{
+    _editor = !_editor;
 }
 
 void Window::SetCursorMode(bool mode)

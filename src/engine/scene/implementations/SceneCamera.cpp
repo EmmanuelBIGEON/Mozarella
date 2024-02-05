@@ -3,6 +3,7 @@
 #include "ViewFactory.h"
 #include "ObjectFactory.h"
 #include "GraphicContext.h"
+#include "QuickEditor.h"
 
 SceneCamera::SceneCamera()
 {
@@ -23,6 +24,10 @@ SceneCamera::SceneCamera()
     auto plane = ObjectFactory::CreateRectangle(p1, p2,  p3, p4);
     context->AddObject(plane);
 
+    // activate the editor.
+    QuickEditor::SetActivePreset(QuickEditor_Demo);
+    Window::activeWindow->DisplayEditor(true);
+
     // Add a camera to the scene.
     _myView->EnableCamera();
 
@@ -37,6 +42,18 @@ SceneCamera::~SceneCamera()
 void SceneCamera::Process(Event& event)
 {
     _myView->UpdateCamera(event);
+    
+    if(event.GetEventType() == EventType::EVENT_KEY)
+    {
+        KeyEvent* keyEvent = (KeyEvent*)&event;
+        if(keyEvent->GetKeyType() == EventKeyType::EVENT_KEY_PRESSED)
+        {
+            KeyPressedEvent* keyPressedEvent = (KeyPressedEvent*)&event;
+
+            if (keyPressedEvent->key == Key_T)
+                Window::activeWindow->ToggleEditor();
+        }
+    }
 }
 
 void SceneCamera::Render()

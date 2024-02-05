@@ -26,6 +26,9 @@ class Window
 
         void SetCursorMode(bool mode);
 
+        void DisplayEditor(bool mode);
+        void ToggleEditor();
+
         Signal<Event&> OnEvent;
 
         static Window* activeWindow;
@@ -37,5 +40,6 @@ class Window
         unsigned int _width, _height;
         GLFWwindow* _window;
         Scene* _currentScene;
+        bool _editor;
         
 };
