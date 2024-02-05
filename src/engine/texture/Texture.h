@@ -13,9 +13,10 @@ public:
 
 	void Bind(unsigned int slot);
 
-	unsigned int GetID();
+	std::string type;
+	std::string path;
+	unsigned int ID;
 
 private:
-	unsigned int _ID;
 	unsigned char* _data = nullptr;
 };

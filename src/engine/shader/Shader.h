@@ -4,7 +4,8 @@
 
 enum ShaderID
 {
-    SHADER_BASE
+    SHADER_BASE,
+    SHADER_MATERIAL
 };
 
 class Shader
@@ -36,5 +37,6 @@ class Shader
     protected:
 
         static Shader* shader_base;
+        static Shader* shader_material;
 
 };

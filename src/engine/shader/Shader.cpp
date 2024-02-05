@@ -13,6 +13,8 @@
 #include <glm/ext.hpp>
 
 Shader* Shader::shader_base = nullptr;
+Shader* Shader::shader_material = nullptr;
+
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
@@ -139,6 +141,7 @@ void Shader::SetMat4(const char* name, const glm::mat4& value) const
 void Shader::InitShaders()
 {
     shader_base = new Shader("shaders/base.vs", "shaders/base.fs");
+    shader_material = new Shader("shaders/material.vs", "shaders/material.fs");
 }
 
 Shader* Shader::GetShader(ShaderID shader)
@@ -147,6 +150,8 @@ Shader* Shader::GetShader(ShaderID shader)
     {
         case SHADER_BASE:
             return shader_base;
+        case SHADER_MATERIAL:
+            return shader_material;
         default:
             throw new std::runtime_error("Couldn't find shader.");
             return nullptr;
@@ -160,6 +165,12 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
         shader_base->Use();
         shader_base->SetMat4("projection", projectionMatrix);
     }
+    
+    if (shader_material != nullptr)
+    {
+        shader_material->Use();
+        shader_material->SetMat4("projection", projectionMatrix);
+    }
 }
 
 void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
@@ -170,4 +181,9 @@ void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
         shader_base->SetMat4("view", viewMatrix);
     }
     
+    if (shader_material != nullptr)
+    {
+        shader_material->Use();
+        shader_material->SetMat4("view", viewMatrix);
+    }
 }

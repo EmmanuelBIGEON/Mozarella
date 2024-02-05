@@ -8,6 +8,7 @@ include_directories(
     src/engine/editor
     src/engine/event
     src/engine/object
+    src/engine/object/model
     src/engine/object/basics
     src/engine/scene
     src/engine/scene/implementations
@@ -36,6 +37,7 @@ set(SRCS
     src/engine/scene/implementations/SceneColor.cpp 
     src/engine/scene/implementations/SceneCube.cpp 
     src/engine/scene/implementations/SceneCamera.cpp 
+    src/engine/scene/implementations/SceneMesh.cpp 
 
     src/engine/view/View.cpp 
     src/engine/view/Camera.cpp 
@@ -53,6 +55,8 @@ set(SRCS
 
     src/engine/object/GraphicObject.cpp 
     src/engine/object/ObjectFactory.cpp 
+    src/engine/object/model/Mesh.cpp 
+    src/engine/object/model/Model.cpp 
     src/engine/object/basics/Cube.cpp 
     src/engine/object/basics/Rectangle.cpp 
 )
@@ -76,6 +80,8 @@ target_compile_features(Mozarella PRIVATE cxx_std_17)
 target_link_libraries(Mozarella
     ${GLFW_DIR}/glfw3.lib
     ${FREETYPE_DIR}/lib/freetyped.lib
+    ${ASSIMP_DIR}/assimp-vc143-mt.lib
+    ${ASSIMP_DIR}/zlibstatic.lib
 )
 
 install(TARGETS Mozarella DESTINATION ${CMAKE_INSTALL_PREFIX})

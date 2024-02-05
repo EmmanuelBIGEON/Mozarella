@@ -4,6 +4,7 @@
 #include "SceneColor.h"
 #include "SceneCube.h"
 #include "SceneCamera.h"
+#include "SceneMesh.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -22,8 +23,8 @@ Scene* SceneFactory::CreateCubeScene()
     return scene;
 }
 
-Scene* SceneFactory::CreateCameraScene()
+Scene* SceneFactory::CreateMeshScene()
 {
-    auto scene = new SceneCamera();
+    auto scene = new SceneMesh();
     return scene;
 }

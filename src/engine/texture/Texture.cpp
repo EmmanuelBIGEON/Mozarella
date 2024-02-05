@@ -5,7 +5,7 @@
 #include <iostream>
 #include <filesystem>
 
-Texture::Texture() : _ID(0), _data(nullptr)
+Texture::Texture() : ID(0), _data(nullptr)
 {
 }
 
@@ -25,8 +25,8 @@ Texture* Texture::Load(const std::string& filePath)
     }
 
 
-    glGenTextures(1, &texture->_ID);
-    glBindTexture(GL_TEXTURE_2D, texture->_ID);
+    glGenTextures(1, &texture->ID);
+    glBindTexture(GL_TEXTURE_2D, texture->ID);
     // set the texture wrapping parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -59,10 +59,5 @@ Texture* Texture::Load(const std::string& filePath)
 void Texture::Bind(unsigned int slot)
 {
 	glActiveTexture(GL_TEXTURE0 + slot);
-	glBindTexture(GL_TEXTURE_2D, _ID);
-}
-
-unsigned int Texture::GetID()
-{
-    return _ID;
+	glBindTexture(GL_TEXTURE_2D, ID);
 }

@@ -18,3 +18,4 @@ set PROJECT_DIR=%MAIN_DIR%
 @REM Librairies
 set GLFW_DIR=%MAIN_DIR%/lib/GLFW
 set FREETYPE_DIR=%MAIN_DIR%/lib/freetype
+set ASSIMP_DIR=%MAIN_DIR%/lib/assimp

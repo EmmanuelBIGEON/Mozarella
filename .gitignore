@@ -1,4 +1,8 @@
 build/**
+
 bin/**
+!bin/assimp-vc143-mt.dll
+
 include/**
 lib/** 
+models/**
