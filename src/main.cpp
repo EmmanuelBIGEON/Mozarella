@@ -17,7 +17,8 @@ int main(int argc, char** argv)
     // auto scene = SceneFactory::CreateCubeScene();
     // auto scene = SceneFactory::CreateMeshScene();
     // auto scene = SceneFactory::CreateLightScene();
-    auto scene = SceneFactory::CreateSphereScene();
+    // auto scene = SceneFactory::CreateSphereScene();
+    auto scene = SceneFactory::CreateEditScene();
     window->SetScene(scene);
     mozarella->Add(window);
 

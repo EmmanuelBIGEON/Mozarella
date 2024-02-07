@@ -7,6 +7,7 @@
 #include "SceneMesh.h"
 #include "SceneLight.h"
 #include "SceneSphere.h"
+#include "SceneEdit.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -40,5 +41,11 @@ Scene* SceneFactory::CreateLightScene()
 Scene* SceneFactory::CreateSphereScene()
 {
     auto scene = new SceneSphere();
+    return scene;
+}
+
+Scene* SceneFactory::CreateEditScene()
+{
+    auto scene = new SceneEdit();
     return scene;
 }

@@ -45,6 +45,7 @@ set(SRCS
     src/engine/scene/implementations/SceneMesh.cpp 
     src/engine/scene/implementations/SceneLight.cpp 
     src/engine/scene/implementations/SceneSphere.cpp 
+    src/engine/scene/implementations/SceneEdit.cpp 
 
     src/engine/view/View.cpp 
     src/engine/view/Camera.cpp 
@@ -63,6 +64,7 @@ set(SRCS
     src/engine/object/ObjectFactory.cpp 
     src/engine/object/model/Mesh.cpp 
     src/engine/object/model/Model.cpp 
+    src/engine/object/basics/ColoredCube.cpp 
     src/engine/object/basics/Cube.cpp 
     src/engine/object/basics/Rectangle.cpp 
     src/engine/object/basics/Sphere.cpp 
@@ -76,7 +78,7 @@ set(SRCS_IMGUI
     src/engine/imgui/imgui_widgets.cpp
 
     src/engine/imgui/imgui_impl_glfw.cpp
-    src/engine/imgui/imgui_impl_opengl3.cpp # 3 ? 
+    src/engine/imgui/imgui_impl_opengl3.cpp 
 )
 
 project(Mozarella)

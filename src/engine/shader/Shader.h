@@ -7,7 +7,8 @@ enum ShaderID
     SHADER_BASE,
     SHADER_MATERIAL,
     SHADER_LIGHT,
-    SHADER_MESH
+    SHADER_SIMPLEMESH,
+    SHADER_SPHERE_TEST
 };
 
 class Shader
@@ -41,6 +42,7 @@ class Shader
         static Shader* shader_base;
         static Shader* shader_material;
         static Shader* shader_light;
-        static Shader* shader_mesh;
+        static Shader* shader_simplemesh;
+        static Shader* shader_sphere_test;
 
 };

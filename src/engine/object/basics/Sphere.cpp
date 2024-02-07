@@ -41,7 +41,7 @@ void Sphere::Compute()
 
 void Sphere::Render()
 {
-    auto shader = Shader::GetShader(SHADER_MESH);
+    auto shader = Shader::GetShader(SHADER_SPHERE_TEST);
     auto model = glm::mat4(1.0f);
     model = glm::translate(model, _position);
     shader->SetMat4("model", model);

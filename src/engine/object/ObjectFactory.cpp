@@ -5,6 +5,20 @@ Cube* ObjectFactory::CreateCube(const glm::vec3& position)
     return new Cube(position);
 }
 
+ColoredCube* ObjectFactory::CreateColoredCube(const glm::vec3& position, ColourGroup* colourgroup)
+{
+    auto cube = new ColoredCube(position, {0.0f, 0.0f , 1.0f});
+    cube->Assign(colourgroup);
+    return cube;
+}
+
+ColoredCube* ObjectFactory::CreateColoredCube(const glm::vec3& position, float width, ColourGroup* colourgroup)
+{
+    auto cube = new ColoredCube(position, width, {0.0f, 0.0f , 1.0f});
+    cube->Assign(colourgroup);
+    return cube;
+}
+
 Rectangle* ObjectFactory::CreateRectangle()
 {
     return new Rectangle();

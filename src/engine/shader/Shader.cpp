@@ -15,7 +15,8 @@
 Shader* Shader::shader_base = nullptr;
 Shader* Shader::shader_material = nullptr;
 Shader* Shader::shader_light = nullptr;
-Shader* Shader::shader_mesh = nullptr;
+Shader* Shader::shader_simplemesh = nullptr;
+Shader* Shader::shader_sphere_test = nullptr;
 
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
@@ -145,7 +146,8 @@ void Shader::InitShaders()
     shader_base = new Shader("shaders/base.vs", "shaders/base.fs");
     shader_material = new Shader("shaders/material.vs", "shaders/material.fs");
     shader_light = new Shader("shaders/light.vs", "shaders/light.fs");
-    shader_mesh = new Shader("shaders/mesh.vs", "shaders/mesh.fs");
+    shader_simplemesh = new Shader("shaders/simplemesh.vs", "shaders/simplemesh.fs");
+    shader_sphere_test = new Shader("shaders/spheretest.vs", "shaders/spheretest.fs");
 }
 
 Shader* Shader::GetShader(ShaderID shader)
@@ -158,8 +160,10 @@ Shader* Shader::GetShader(ShaderID shader)
             return shader_material;
         case SHADER_LIGHT:
             return shader_light;
-        case SHADER_MESH:
-            return shader_mesh;
+        case SHADER_SIMPLEMESH:
+            return shader_simplemesh;
+        case SHADER_SPHERE_TEST:
+            return shader_sphere_test;
         default:
             throw new std::runtime_error("Couldn't find shader.");
             return nullptr;
@@ -183,10 +187,15 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
         shader_light->Use();
         shader_light->SetMat4("projection", projectionMatrix);
     }
-    if (shader_mesh != nullptr)
+    if (shader_simplemesh != nullptr)
     {
-        shader_mesh->Use();
-        shader_mesh->SetMat4("projection", projectionMatrix);
+        shader_simplemesh->Use();
+        shader_simplemesh->SetMat4("projection", projectionMatrix);
+    }
+    if (shader_sphere_test != nullptr)
+    {
+        shader_sphere_test->Use();
+        shader_sphere_test->SetMat4("projection", projectionMatrix);
     }
 }
 
@@ -210,9 +219,15 @@ void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
         shader_light->SetMat4("view", viewMatrix);
     }
     
-    if (shader_mesh != nullptr)
+    if (shader_simplemesh != nullptr)
     {
-        shader_mesh->Use();
-        shader_mesh->SetMat4("view", viewMatrix);
+        shader_simplemesh->Use();
+        shader_simplemesh->SetMat4("view", viewMatrix);
+    }
+    
+    if (shader_sphere_test != nullptr)
+    {
+        shader_sphere_test->Use();
+        shader_sphere_test->SetMat4("view", viewMatrix);
     }
 }
