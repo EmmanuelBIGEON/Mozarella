@@ -14,6 +14,8 @@
 
 Shader* Shader::shader_base = nullptr;
 Shader* Shader::shader_material = nullptr;
+Shader* Shader::shader_light = nullptr;
+Shader* Shader::shader_mesh = nullptr;
 
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
@@ -142,6 +144,8 @@ void Shader::InitShaders()
 {
     shader_base = new Shader("shaders/base.vs", "shaders/base.fs");
     shader_material = new Shader("shaders/material.vs", "shaders/material.fs");
+    shader_light = new Shader("shaders/light.vs", "shaders/light.fs");
+    shader_mesh = new Shader("shaders/mesh.vs", "shaders/mesh.fs");
 }
 
 Shader* Shader::GetShader(ShaderID shader)
@@ -152,6 +156,10 @@ Shader* Shader::GetShader(ShaderID shader)
             return shader_base;
         case SHADER_MATERIAL:
             return shader_material;
+        case SHADER_LIGHT:
+            return shader_light;
+        case SHADER_MESH:
+            return shader_mesh;
         default:
             throw new std::runtime_error("Couldn't find shader.");
             return nullptr;
@@ -165,11 +173,20 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
         shader_base->Use();
         shader_base->SetMat4("projection", projectionMatrix);
     }
-    
     if (shader_material != nullptr)
     {
         shader_material->Use();
         shader_material->SetMat4("projection", projectionMatrix);
+    }
+    if (shader_light != nullptr)
+    {
+        shader_light->Use();
+        shader_light->SetMat4("projection", projectionMatrix);
+    }
+    if (shader_mesh != nullptr)
+    {
+        shader_mesh->Use();
+        shader_mesh->SetMat4("projection", projectionMatrix);
     }
 }
 
@@ -185,5 +202,17 @@ void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
     {
         shader_material->Use();
         shader_material->SetMat4("view", viewMatrix);
+    }
+    
+    if (shader_light != nullptr)
+    {
+        shader_light->Use();
+        shader_light->SetMat4("view", viewMatrix);
+    }
+    
+    if (shader_mesh != nullptr)
+    {
+        shader_mesh->Use();
+        shader_mesh->SetMat4("view", viewMatrix);
     }
 }

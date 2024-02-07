@@ -5,6 +5,8 @@
 #include "SceneCube.h"
 #include "SceneCamera.h"
 #include "SceneMesh.h"
+#include "SceneLight.h"
+#include "SceneSphere.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -26,5 +28,17 @@ Scene* SceneFactory::CreateCubeScene()
 Scene* SceneFactory::CreateMeshScene()
 {
     auto scene = new SceneMesh();
+    return scene;
+}
+
+Scene* SceneFactory::CreateLightScene()
+{
+    auto scene = new SceneLight();
+    return scene;
+}
+
+Scene* SceneFactory::CreateSphereScene()
+{
+    auto scene = new SceneSphere();
     return scene;
 }

@@ -4,6 +4,8 @@ include_directories(
     src/engine
     src/engine/assets
     src/engine/common
+    src/engine/common/math 
+    src/engine/common/math/algorithm
     src/engine/context
     src/engine/editor
     src/engine/event
@@ -27,8 +29,11 @@ set(SRCS
     src/main.cpp
     src/glad.c
     src/engine/Engine.cpp
+    src/engine/window/Window.cpp
 
     src/engine/assets/Assets.cpp
+
+    src/engine/common/math/algorithm/MozMathSubdivision.cpp
 
     src/engine/editor/QuickEditor.cpp
 
@@ -38,6 +43,8 @@ set(SRCS
     src/engine/scene/implementations/SceneCube.cpp 
     src/engine/scene/implementations/SceneCamera.cpp 
     src/engine/scene/implementations/SceneMesh.cpp 
+    src/engine/scene/implementations/SceneLight.cpp 
+    src/engine/scene/implementations/SceneSphere.cpp 
 
     src/engine/view/View.cpp 
     src/engine/view/Camera.cpp 
@@ -45,7 +52,6 @@ set(SRCS
     src/engine/view/implementations/ColorView.cpp
     src/engine/view/implementations/Simple3DView.cpp
     
-    src/engine/window/Window.cpp
     
     src/engine/context/GraphicContext.cpp 
     
@@ -59,6 +65,7 @@ set(SRCS
     src/engine/object/model/Model.cpp 
     src/engine/object/basics/Cube.cpp 
     src/engine/object/basics/Rectangle.cpp 
+    src/engine/object/basics/Sphere.cpp 
 )
 
 set(SRCS_IMGUI

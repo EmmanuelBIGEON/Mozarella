@@ -14,3 +14,13 @@ Rectangle* ObjectFactory::CreateRectangle(const glm::vec3& p1, const glm::vec3& 
 {
     return new Rectangle(p1, p2, p3, p4);
 }
+
+Sphere* ObjectFactory::CreateSphere(const glm::vec3& position)
+{
+    return new Sphere(position);
+}
+
+Sphere* ObjectFactory::CreateSphere(const glm::vec3& position, unsigned int subdivisionCount)
+{
+    return new Sphere(position, subdivisionCount);
+}

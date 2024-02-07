@@ -69,3 +69,9 @@ void Camera::Update(Event& event)
     }
 }
 
+
+void Camera::SetPosition(const glm::vec3& position)
+{
+        Position = position;
+        updateCameraVectors();
+}

@@ -5,7 +5,9 @@
 enum ShaderID
 {
     SHADER_BASE,
-    SHADER_MATERIAL
+    SHADER_MATERIAL,
+    SHADER_LIGHT,
+    SHADER_MESH
 };
 
 class Shader
@@ -38,5 +40,7 @@ class Shader
 
         static Shader* shader_base;
         static Shader* shader_material;
+        static Shader* shader_light;
+        static Shader* shader_mesh;
 
 };

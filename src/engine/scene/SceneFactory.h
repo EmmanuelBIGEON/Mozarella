@@ -12,4 +12,6 @@ class SceneFactory
         static Scene* CreateCubeScene();
         static Scene* CreateCameraScene();
         static Scene* CreateMeshScene();
+        static Scene* CreateLightScene();
+        static Scene* CreateSphereScene();
 };
