@@ -26,6 +26,12 @@ Scene* SceneFactory::CreateCubeScene()
     return scene;
 }
 
+Scene* SceneFactory::CreateCameraScene()
+{
+    auto scene = new SceneCamera();
+    return scene;
+}
+
 Scene* SceneFactory::CreateMeshScene()
 {
     auto scene = new SceneMesh();

@@ -65,8 +65,10 @@ set(SRCS
     src/engine/object/ObjectFactory.cpp 
     src/engine/object/model/Mesh.cpp 
     src/engine/object/model/Model.cpp 
-    src/engine/object/basics/ColoredCube.cpp 
+    src/engine/object/basics/LightSource.cpp 
     src/engine/object/basics/Cube.cpp 
+    src/engine/object/basics/ColoredCube.cpp 
+    src/engine/object/basics/TexturedCube.cpp 
     src/engine/object/basics/Rectangle.cpp 
     src/engine/object/basics/Sphere.cpp 
 )

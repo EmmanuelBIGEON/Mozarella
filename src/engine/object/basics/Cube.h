@@ -1,32 +1,32 @@
-#pragma once
-
-#include <glm/ext.hpp>
+#pragma once 
 
 #include "GraphicObject.h"
-#include "Assets.h"
+
+#include <glm/ext.hpp>
+#include "ColourGroup.h"
+
 
 class Cube : public GraphicObject 
 {
     public: 
-        Cube(const glm::vec3& position);
-        virtual ~Cube(); 
+        Cube(const glm::vec3& position, const glm::vec3& color);
+        Cube(const glm::vec3& position, float width, const glm::vec3& color);
+        virtual ~Cube();
 
-        void ToggleRotation();
-        void SetTextureID(assets::Texture textureName);
+        void Assign(ColourGroup* colourGroup);
+
         virtual void Compute() override;
         virtual void Render() override;
 
-    private:
+    protected: 
         glm::vec3 _position;
+        glm::vec3 _color;
+        ColourGroup* _colourGroup;
+        
         glm::mat4 _model;
-
-        assets::Texture _textureName;
+        float _width;
 
         bool _computed;
-        bool _rotating;
-
         unsigned int _VAO, _VBO;
         float* _vertices;
-        unsigned _texture;
 };
-

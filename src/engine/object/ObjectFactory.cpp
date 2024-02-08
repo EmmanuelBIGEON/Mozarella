@@ -1,8 +1,36 @@
 #include "ObjectFactory.h"
 
+
 Cube* ObjectFactory::CreateCube(const glm::vec3& position)
 {
-    return new Cube(position);
+    return new Cube(position, {0.0f, 0.0f, 1.0f});
+}
+
+Cube* ObjectFactory::CreateCube(const glm::vec3& position, const glm::vec3& color)
+{
+    return new Cube(position, color);
+}
+
+Cube* ObjectFactory::CreateCube(const glm::vec3& position, ColourGroup* colorGroup)
+{
+    auto cube = new Cube(position, {1.0f, 0.0f, 0.0f});
+    cube->Assign(colorGroup);
+    return cube;
+}
+
+LightSource* ObjectFactory::CreateLightSource(const glm::vec3& position)
+{
+    return new LightSource(position, {0.0f, 0.0f, 1.0f});
+}
+
+LightSource* ObjectFactory::CreateLightSource(const glm::vec3& position, const glm::vec3& lightColor)
+{
+    return new LightSource(position, lightColor);
+}
+
+TexturedCube* ObjectFactory::CreateTexturedCube(const glm::vec3& position)
+{
+    return new TexturedCube(position);
 }
 
 ColoredCube* ObjectFactory::CreateColoredCube(const glm::vec3& position, ColourGroup* colourgroup)

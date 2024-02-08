@@ -5,6 +5,7 @@
 #include <assimp/postprocess.h>
 
 #include <iostream>
+#include <fstream>
 
 #include <glad/glad.h>
 #include <stb_image.h>
@@ -12,8 +13,9 @@
 #include "Shader.h"
 
 unsigned int TextureFromFile(const char *path, const std::string &directory);
+unsigned int TextureFromData(const char *raw, int datalen, const char* hint);
 
-Model::Model(const char *path)
+Model::Model(const char *path) : _path(path), _scene(nullptr)
 {
     loadModel(path);
 }
@@ -49,10 +51,10 @@ void Model::Compute()
 void Model::Render()
 {
     auto shader = Shader::GetShader(SHADER_MATERIAL);
+    shader->Use();
     auto model = glm::mat4(1.0f);
     model = glm::rotate(model, 1.57f, glm::vec3(0.0f, 0.0f, 1.0f));
     shader->SetMat4("model", model);
-    shader->Use();
 
     for(unsigned int i = 0; i < _meshes.size(); i++)
         _meshes[i].Render();
@@ -129,21 +131,57 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     // specular: texture_specularN
     // normal: texture_normalN
 
-    // 1. diffuse maps
-    std::vector<Texture*> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-    textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-    // 2. specular maps
-    std::vector<Texture*> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-    textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-    // 3. normal maps
-    std::vector<Texture*> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-    textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-    // 4. height maps
-    std::vector<Texture*> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-    textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+    if (_path.substr(_path.find_last_of(".") + 1) == "glb") 
+    {
+        _scene = scene;
+        // 1. diffuse maps
+        std::vector<Texture*> diffuseMaps = loadEmbeddedMaterialTextures(material, aiTextureType_DIFFUSE, "diffuse");
+        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+        // 2. specular maps
+        std::vector<Texture*> specularMaps = loadEmbeddedMaterialTextures(material, aiTextureType_SPECULAR, "specular");
+        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+        // 3. normal maps
+        std::vector<Texture*> normalMaps = loadEmbeddedMaterialTextures(material, aiTextureType_HEIGHT, "normal");
+        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+        // return a mesh object created from the extracted mesh data
+        return Mesh(vertices, indices, textures);
+    }
+    else 
+    {
+
+        // 1. diffuse maps
+        std::vector<Texture*> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "diffuse");
+        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+        // 2. specular maps
+        std::vector<Texture*> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "specular");
+        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+        // 3. normal maps
+        std::vector<Texture*> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "normal");
+        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+
+        // return a mesh object created from the extracted mesh data
+        return Mesh(vertices, indices, textures);
+
+    }
+}
+
+std::vector<Texture*> Model::loadEmbeddedMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
+{
+    std::vector<Texture*> textures;
+    for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+    {
+        aiString str;
+        mat->GetTexture(type, i, &str);
+        const aiTexture* retrievedTexture = _scene->GetEmbeddedTexture(str.C_Str());
     
-    // return a mesh object created from the extracted mesh data
-    return Mesh(vertices, indices, textures);
+        Texture* texture = new Texture();
+        texture->ID = TextureFromData((const char*)retrievedTexture->pcData, 
+        retrievedTexture->mWidth, retrievedTexture->achFormatHint);
+        texture->type = typeName;
+        texture->path = retrievedTexture->mFilename.C_Str();
+        textures.push_back(texture);
+    }
+    return textures;
 }
 
 // checks all material textures of a given type and loads the textures if they're not loaded yet.
@@ -213,6 +251,45 @@ unsigned int TextureFromFile(const char *path, const std::string &directory)
     {
         std::cout << "Texture failed to load at path: " << path << std::endl;
         stbi_image_free(data);
+    }
+
+    return textureID;
+}
+
+
+unsigned int TextureFromData(const char *raw, int datalen, const char* hint)
+{
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+
+    // std::ofstream myfile;
+    // myfile.open ("YYYAAAOOOOPOINTWAW.jpg", std::ios::binary);
+    // myfile.write(data, sizeof(unsigned char)* width);
+    // myfile.close();
+    int width, height, nrComponents = 4;
+	unsigned char *data = stbi_load_from_memory((unsigned char*)raw, datalen, &width, &height, &nrComponents, nrComponents);
+
+    if (data)
+    {
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        if(!strcmp(hint, "jpg"))
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        }else 
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        }
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    }
+    else
+    {
+        std::cout << "TextureFromData empty data" << std::endl;
     }
 
     return textureID;

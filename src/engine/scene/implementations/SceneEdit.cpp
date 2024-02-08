@@ -4,17 +4,25 @@
 #include "ObjectFactory.h"
 #include "GraphicContext.h"
 #include "QuickEditor.h"
+#include "Shader.h"
+
 
 SceneEdit::SceneEdit()
 {
     _myView = ViewFactory::CreateSimple3DView();
     auto context = std::make_shared<GraphicContext>();
+    
+    // Une lumiere blanche par défaut
+    _lightColor = glm::vec3({1.0f, 1.0f, 1.0f});
 
     // On génère une batterie de cube coloré.
     _groupColor = new ColourGroup({0.0f, 1.0f, 0.0f});
 
     // On ajoute l'éditeur de couleur
-    _editor = new ColorEditor(_groupColor);
+    _editor = new ColorEditor();
+    _editor->Add("Cubes's color", _groupColor);
+    _editor->Add("Light's color", _lightColor);
+
 
     for(int i = 0 ; i < 4; i++)
     {
@@ -44,6 +52,10 @@ void SceneEdit::Process(Event& event)
 
 void SceneEdit::Render()
 {
+    auto shader_simplemesh = Shader::GetShader(SHADER_SIMPLEMESH);
+    shader_simplemesh->Use();
+    shader_simplemesh->SetVec3("lightColor", _lightColor);
+
     for(const auto& view : _views)
     {
         if(!view->Render())

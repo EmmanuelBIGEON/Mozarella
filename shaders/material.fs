@@ -33,7 +33,7 @@ uniform Light light;
 void main()
 {
     // ambient
-    vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
+    vec3 ambient = texture(material.diffuse, TexCoords).rgb;
     
     // diffuse 
     vec3 norm = normalize(Normal);
@@ -54,13 +54,7 @@ void main()
     diffuse  *= intensity;
     specular *= intensity;
     
-    // attenuation
-    float distance    = length(light.position - FragPos);
-    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
-    ambient  *= attenuation; 
-    diffuse   *= attenuation;
-    specular *= attenuation;   
         
-    vec3 result = ambient + diffuse + specular;
+    vec3 result = ambient;
     FragColor = vec4(result, 1.0);
 } 

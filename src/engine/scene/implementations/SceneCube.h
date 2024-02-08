@@ -2,7 +2,7 @@
   
 #include "Scene.h"
 
-class Cube;
+class TexturedCube;
 
 class SceneCube : public Scene 
 {
@@ -14,6 +14,6 @@ class SceneCube : public Scene
         virtual void Render() override;
 
     private:
-        Cube* _cube;
+        TexturedCube* _cube;
 
 };

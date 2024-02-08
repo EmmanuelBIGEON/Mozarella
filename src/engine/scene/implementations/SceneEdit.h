@@ -9,14 +9,16 @@ class SceneEdit : public Scene
 {
     public: 
         SceneEdit();
-void NewFunction();
-virtual ~SceneEdit();
+        void NewFunction();
+        virtual ~SceneEdit();
 
-virtual void Process(Event &event) override;
-virtual void Render() override;
+        virtual void Process(Event &event) override;
+        virtual void Render() override;
 
-private:
-Simple3DView *_myView;
-ColourGroup *_groupColor;
-ColorEditor *_editor;
+    private:
+        Simple3DView *_myView;
+        ColourGroup *_groupColor;
+        ColorEditor *_editor;
+
+        glm::vec3 _lightColor;
 };

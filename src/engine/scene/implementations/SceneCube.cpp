@@ -10,7 +10,7 @@ SceneCube::SceneCube()
 {
     auto view = ViewFactory::CreateSimple3DView();
     auto context = std::make_shared<GraphicContext>();
-    _cube = ObjectFactory::CreateCube({0.0f, 0.0f, 0.0f});
+    _cube = ObjectFactory::CreateTexturedCube({0.0f, 0.0f, 0.0f});
     context->AddObject(_cube);
 
     _cube->ToggleRotation();

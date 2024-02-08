@@ -2,8 +2,10 @@
 
 #include <glm/ext.hpp>
 
-#include "Cube.h"
+#include "TexturedCube.h"
 #include "ColoredCube.h"
+#include "Cube.h"
+#include "LightSource.h"
 #include "Rectangle.h"
 #include "Sphere.h"
 
@@ -11,6 +13,11 @@ class ObjectFactory
 {
     public: 
         static Cube* CreateCube(const glm::vec3& position);
+        static Cube* CreateCube(const glm::vec3& position, const glm::vec3& color);
+        static Cube* CreateCube(const glm::vec3& position, ColourGroup* colorGroup);
+        static LightSource* CreateLightSource(const glm::vec3& position);
+        static LightSource* CreateLightSource(const glm::vec3& position, const glm::vec3& lightColor);
+        static TexturedCube* CreateTexturedCube(const glm::vec3& position);
         static ColoredCube* CreateColoredCube(const glm::vec3& position, ColourGroup* colourgroup = nullptr);
         static ColoredCube* CreateColoredCube(const glm::vec3& position, float width, ColourGroup* colourgroup = nullptr);
         static Rectangle* CreateRectangle();

@@ -11,7 +11,7 @@ SceneCamera::SceneCamera()
     auto context = std::make_shared<GraphicContext>();
 
     // Add a rotating cube to the scene.
-    auto cube = ObjectFactory::CreateCube({0.0f, 0.0f, 2.0f});
+    auto cube = ObjectFactory::CreateTexturedCube({0.0f, 0.0f, 2.0f});
     cube->SetTextureID(assets::Texture::Texture_Cube2);
     cube->ToggleRotation();
     context->AddObject(cube);
@@ -24,9 +24,6 @@ SceneCamera::SceneCamera()
     auto plane = ObjectFactory::CreateRectangle(p1, p2,  p3, p4);
     context->AddObject(plane);
 
-    // activate the editor.
-    QuickEditor::SetActivePreset(QuickEditor_Demo);
-    Window::activeWindow->DisplayEditor(true);
 
     // Add a camera to the scene.
     _myView->EnableCamera();
