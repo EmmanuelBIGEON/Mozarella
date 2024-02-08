@@ -35,6 +35,7 @@ set(SRCS
 
     src/engine/common/math/algorithm/MozMathSubdivision.cpp
 
+    src/engine/editor/ColorEditor.cpp
     src/engine/editor/QuickEditor.cpp
 
     src/engine/scene/Scene.cpp

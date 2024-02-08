@@ -9,13 +9,12 @@ SceneEdit::SceneEdit()
 {
     _myView = ViewFactory::CreateSimple3DView();
     auto context = std::make_shared<GraphicContext>();
-    
-    // activate the editor.
-    QuickEditor::SetActivePreset(QuickEditor_Demo);
-    Window::activeWindow->DisplayEditor(true);
 
     // On génère une batterie de cube coloré.
     _groupColor = new ColourGroup({0.0f, 1.0f, 0.0f});
+
+    // On ajoute l'éditeur de couleur
+    _editor = new ColorEditor(_groupColor);
 
     for(int i = 0 ; i < 4; i++)
     {
@@ -53,4 +52,5 @@ void SceneEdit::Render()
             break;
         }
     }
+    _editor->Display();
 }
