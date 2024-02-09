@@ -1,5 +1,6 @@
 #include "ObjectFactory.h"
 
+#include "ModelLoader.h"
 
 Cube* ObjectFactory::CreateCube(const glm::vec3& position)
 {
@@ -65,4 +66,10 @@ Sphere* ObjectFactory::CreateSphere(const glm::vec3& position)
 Sphere* ObjectFactory::CreateSphere(const glm::vec3& position, unsigned int subdivisionCount)
 {
     return new Sphere(position, subdivisionCount);
+}
+
+Model* ObjectFactory::LoadModel(const std::string& filePath)
+{
+    ModelLoader loader;
+    return loader.Load(filePath);
 }

@@ -60,11 +60,13 @@ set(SRCS
     src/engine/shader/Shader.cpp
     
     src/engine/texture/Texture.cpp
+    src/engine/texture/TextureLoader.cpp
 
     src/engine/object/GraphicObject.cpp 
     src/engine/object/ObjectFactory.cpp 
     src/engine/object/model/Mesh.cpp 
     src/engine/object/model/Model.cpp 
+    src/engine/object/model/ModelLoader.cpp 
     src/engine/object/basics/LightSource.cpp 
     src/engine/object/basics/Cube.cpp 
     src/engine/object/basics/ColoredCube.cpp 

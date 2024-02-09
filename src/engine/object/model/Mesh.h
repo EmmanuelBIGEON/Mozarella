@@ -3,10 +3,9 @@
 #include <vector>
 #include <glm/ext.hpp>
 
-#include "Texture.h"
 #include "GraphicObject.h"
 
-#define MAX_BONE_INFLUENCE 4
+#include "Texture.h"
 
 struct Vertex {
     glm::vec3 Position;
@@ -17,6 +16,7 @@ struct Vertex {
 class Mesh : public GraphicObject
 {
     public:
+        Mesh(); // inutile pour le moment.
         Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures);
         virtual ~Mesh();
         

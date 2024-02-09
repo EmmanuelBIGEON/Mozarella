@@ -3,6 +3,7 @@
 #include "ViewFactory.h"
 #include "Model.h"
 #include "GraphicContext.h"
+#include "ObjectFactory.h"
 #include "Shader.h"
 
 #include <stb_image.h>
@@ -13,8 +14,7 @@ SceneMesh::SceneMesh()
     auto context = std::make_shared<GraphicContext>();
 
     // Add a model to the scene
-    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    auto model = new Model("../models/baker_and_the_bridge.glb");
+    auto model = ObjectFactory::LoadModel("../models/baker_and_the_bridge.glb");
     context->AddObject(model);
 
     // Add a camera to the scene.

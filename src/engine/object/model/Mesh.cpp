@@ -3,6 +3,11 @@
 #include <glad/glad.h>
 
 #include "Shader.h"
+#include "Texture.h"
+
+Mesh::Mesh() : GraphicObject(), _VAO(0), _VBO(0), _EBO(0), _computed(false)
+{
+}
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures) :
  GraphicObject(), _VAO(0), _VBO(0), _EBO(0), _computed(false)
