@@ -39,8 +39,8 @@ Texture* Texture::Load(const std::string& filePath)
     unsigned char *data = stbi_load(filePath.c_str(), &width, &height, &nrChannels, 0);
     if (data)
     {
-        if(filePath.substr(filePath.find_last_of(".") + 1) == "png") {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        if(nrChannels == 4) {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
             glGenerateMipmap(GL_TEXTURE_2D);
         }else
         {

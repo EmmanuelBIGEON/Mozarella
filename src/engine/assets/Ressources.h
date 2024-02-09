@@ -8,6 +8,7 @@ namespace assets
         Texture_Cube = 1,
         Texture_Cube2,
         Texture_Cube3,
-        Texture_Plane
+        Texture_Plane,
+        Texture_Background
     };
 };

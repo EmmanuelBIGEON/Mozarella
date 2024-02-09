@@ -6,6 +6,7 @@
 				"${workspaceFolder}/**",
 				"${workspaceFolder}/src/engine/**",
 				"${workspaceFolder}/src/engine/common/**",
+				"${workspaceFolder}/src/engine/texture/**",
 				"${workspaceFolder}/src/engine/event/**",
 				"${workspaceFolder}/src/engine/shader/**",
 				"${workspaceFolder}/src/engine/object/**"

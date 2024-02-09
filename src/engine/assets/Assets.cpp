@@ -54,4 +54,5 @@ bool Assets::LoadTextures()
     mapTextures[assets::Texture::Texture_Cube2] = Texture::Load(BuildTexturePath("abstract-ink-alcohol-min.jpg"));
     mapTextures[assets::Texture::Texture_Cube3] = Texture::Load(BuildTexturePath("oldwood-min.jpg"));
     mapTextures[assets::Texture::Texture_Plane] = Texture::Load(BuildTexturePath("oldwood-min.jpg"));
+    mapTextures[assets::Texture::Texture_Background] = Texture::Load(BuildTexturePath("background-min.png"));
 }

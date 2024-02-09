@@ -6,6 +6,9 @@
 #include "View.h"
 #include "Event.h"
 #include "Camera.h"
+#include "Texture.h"
+
+#include "Rectangle.h"
 
 class GraphicContext;
 
@@ -21,6 +24,11 @@ class Simple3DView : public View
         void UpdateCamera(Event& event);
         Camera* GetCamera();
 
+        void EnableBackground();
+        
+        // do not work for now
+        void SetBackgroundTexture(Texture* texture);
+
         void SetContext(const std::shared_ptr<GraphicContext>& pContext);
         std::shared_ptr<GraphicContext> GetContext();
 
@@ -32,4 +40,7 @@ class Simple3DView : public View
 
         bool _cameraActive;
         Camera* _camera;
+
+        bool _backgroundActive;
+        Rectangle* _backgroundRec;
 };

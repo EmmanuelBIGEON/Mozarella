@@ -17,6 +17,8 @@ _computed(false), _VAO(0), _VBO(0), _texture(0), _vertices(nullptr)
     _p2 = glm::vec3(position.x + tempW, position.y + tempH, position.z);
     _p3 = glm::vec3(position.x + tempW, position.y - tempH, position.z);
     _p4 = glm::vec3(position.x - tempW, position.y - tempH, position.z);
+    _shader = Shader::GetShader(SHADER_BASE);
+    _model = glm::mat4(1.0f);
 }
 
 
@@ -25,6 +27,8 @@ _p1(p1), _p2(p2), _p3(p3), _p4(p4),
 _computed(false), _VAO(0), _VBO(0), _texture(0), _vertices(nullptr)
 {
     _textureName = assets::Texture_Plane;
+    _shader = Shader::GetShader(SHADER_BASE);
+    _model = glm::mat4(1.0f);
 }
 
 Rectangle::~Rectangle()
@@ -36,6 +40,10 @@ void Rectangle::SetTextureID(assets::Texture textureName)
     _textureName = textureName;
 }
 
+void Rectangle::SetShader(Shader* shader)
+{
+    _shader = shader;   
+}
 
 void Rectangle::Compute()
 {
@@ -44,7 +52,6 @@ void Rectangle::Compute()
   if(_VAO) glDeleteVertexArrays(1, &_VAO);
   if(_VBO) glDeleteBuffers(1, &_VBO);
   
-    _model = glm::mat4(1.0f);
 
     // 1 2 3 - 1 3 4
     _vertices = new float[30] {
@@ -71,19 +78,20 @@ void Rectangle::Compute()
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    auto shader = Shader::GetShader(SHADER_BASE);
-    shader->Use();
-    shader->SetInt("texture1", 0);
+    _shader->Use();
+    _shader->SetInt("texture1", 0);
 
     _computed = true;
 }
 
 void Rectangle::Render()
 {
-    auto shader = Shader::GetShader(SHADER_BASE);
-    shader->Use();
-    Assets::Bind(_textureName, 0);
+    _shader->Use();
     glBindVertexArray(_VAO);
-    shader->SetMat4("model", _model);
+    glActiveTexture(GL_TEXTURE0);
+    if(_textureName != assets::Texture::Texture_None)
+        Assets::Bind(_textureName, 0);
+    else 
+    _shader->SetMat4("model", _model);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }

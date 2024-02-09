@@ -3,6 +3,7 @@
 #include <glm/ext.hpp>
 
 #include "GraphicObject.h"
+#include "Shader.h"
 #include "Assets.h"
 
 
@@ -15,6 +16,7 @@ class Rectangle : public GraphicObject
         virtual ~Rectangle();
         
         void SetTextureID(assets::Texture textureName);
+        void SetShader(Shader* shader);
 
         virtual void Compute() override;
         virtual void Render() override;
@@ -23,6 +25,9 @@ class Rectangle : public GraphicObject
         glm::mat4 _model;
         glm::vec3 _p1, _p2, _p3, _p4;
         
+        Shader* _shader;
+        
+        // Texture by asset id
         assets::Texture _textureName;
         
         bool _computed;

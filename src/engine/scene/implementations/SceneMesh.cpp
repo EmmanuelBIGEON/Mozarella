@@ -20,7 +20,12 @@ SceneMesh::SceneMesh()
     // Add a camera to the scene.
     _myView->EnableCamera();
 
+    // Display the default background'
+    _myView->EnableBackground();
+    
     _myView->SetContext(context);
+
+    _myView->GetCamera()->Position = {-9.0f, 15.0f, 51.0f};
     Add(_myView);
 }
 

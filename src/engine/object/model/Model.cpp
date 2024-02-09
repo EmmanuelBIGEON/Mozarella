@@ -28,7 +28,7 @@ void Model::Render()
     auto shader = Shader::GetShader(SHADER_MATERIAL);
     shader->Use();
     auto model = glm::mat4(1.0f);
-    model = glm::rotate(model, 1.57f, glm::vec3(-10.0f, 0.0f, 1.0f));
+    model = glm::rotate(model, glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
     shader->SetMat4("model", model);
 
     for(unsigned int i = 0; i < _meshes.size(); i++)
