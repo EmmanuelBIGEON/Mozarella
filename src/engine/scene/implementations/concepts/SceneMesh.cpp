@@ -15,6 +15,7 @@ SceneMesh::SceneMesh()
 
     // Add a model to the scene
     auto model = ObjectFactory::LoadModel("../models/baker_and_the_bridge.glb");
+    model->SetShader(Shader::GetShader(SHADER_DEPTH));
     context->AddObject(model);
 
     // Add a camera to the scene.

@@ -5,6 +5,8 @@
 #include <string> 
 #include <vector>
 
+#include "Shader.h"
+
 #include <assimp/scene.h>
 
 class Model : public GraphicObject
@@ -13,6 +15,8 @@ class Model : public GraphicObject
         Model();
         virtual ~Model();
     
+        void SetShader(Shader* shader);
+
         void AddMesh(Mesh* mesh);
 
         virtual void Compute() override;
@@ -20,4 +24,6 @@ class Model : public GraphicObject
         
     private:
         std::vector<Mesh*> _meshes;
+        
+        Shader* _shader;
 };

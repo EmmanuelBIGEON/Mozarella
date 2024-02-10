@@ -14,6 +14,7 @@ include_directories(
     src/engine/object/basics
     src/engine/scene
     src/engine/scene/implementations
+    src/engine/scene/implementations/concepts
     src/engine/shader
     src/engine/texture
     src/engine/view
@@ -40,13 +41,14 @@ set(SRCS
 
     src/engine/scene/Scene.cpp
     src/engine/scene/SceneFactory.cpp
-    src/engine/scene/implementations/SceneColor.cpp 
-    src/engine/scene/implementations/SceneCube.cpp 
-    src/engine/scene/implementations/SceneCamera.cpp 
-    src/engine/scene/implementations/SceneMesh.cpp 
-    src/engine/scene/implementations/SceneLight.cpp 
-    src/engine/scene/implementations/SceneSphere.cpp 
-    src/engine/scene/implementations/SceneEdit.cpp 
+    src/engine/scene/implementations/concepts/SceneColor.cpp 
+    src/engine/scene/implementations/concepts/SceneCube.cpp 
+    src/engine/scene/implementations/concepts/SceneCamera.cpp 
+    src/engine/scene/implementations/concepts/SceneMesh.cpp 
+    src/engine/scene/implementations/concepts/SceneLight.cpp 
+    src/engine/scene/implementations/concepts/SceneSphere.cpp 
+    src/engine/scene/implementations/concepts/SceneEdit.cpp 
+    src/engine/scene/implementations/concepts/SceneStencil.cpp 
 
     src/engine/view/View.cpp 
     src/engine/view/Camera.cpp 

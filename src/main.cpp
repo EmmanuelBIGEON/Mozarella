@@ -16,11 +16,12 @@ int main(int argc, char** argv)
     auto window = Window::Create(1400,1000);
     // auto scene = SceneFactory::CreateColorScene({1.0f, 0.0f, 0.0f});
     // auto scene = SceneFactory::CreateCubeScene();
-    auto scene = SceneFactory::CreateMeshScene();
+    // auto scene = SceneFactory::CreateMeshScene();
     // auto scene = SceneFactory::CreateCameraScene();
     // auto scene = SceneFactory::CreateLightScene();
     // auto scene = SceneFactory::CreateSphereScene();
     // auto scene = SceneFactory::CreateEditScene();
+    auto scene = SceneFactory::CreateStencilScene();
     window->SetScene(scene);
     mozarella->Add(window);
 

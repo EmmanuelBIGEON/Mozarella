@@ -8,6 +8,7 @@
 #include "SceneLight.h"
 #include "SceneSphere.h"
 #include "SceneEdit.h"
+#include "SceneStencil.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -53,5 +54,11 @@ Scene* SceneFactory::CreateSphereScene()
 Scene* SceneFactory::CreateEditScene()
 {
     auto scene = new SceneEdit();
+    return scene;
+}
+
+Scene* SceneFactory::CreateStencilScene()
+{
+    auto scene = new SceneStencil();
     return scene;
 }

@@ -85,7 +85,7 @@ void Rectangle::Compute()
 }
 
 void Rectangle::Render()
-{
+{   
     _shader->Use();
     glBindVertexArray(_VAO);
     glActiveTexture(GL_TEXTURE0);

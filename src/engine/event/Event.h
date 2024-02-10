@@ -40,6 +40,7 @@ enum Key
     Key_F = 70,
     Key_S = 83,
     Key_T = 84,
+    Key_U = 85,
     Key_Z = 87,
     Key_Space = 32,
     Key_Ctrl = 341

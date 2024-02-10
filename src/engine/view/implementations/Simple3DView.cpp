@@ -35,23 +35,25 @@ Simple3DView::~Simple3DView()
 bool Simple3DView::Render()
 {
     glClearColor(0.7f, 0.7f, 0.7f , 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); 
+
+    
     
     if (_backgroundActive)
     {
+        glDepthMask(GL_FALSE);  
+
         _backgroundRec->Compute();
         _backgroundRec->Render();   
         
-        glClear(GL_DEPTH_BUFFER_BIT); 
+        glDepthMask(GL_TRUE); 
     }
 
-
-    
     if (_cameraActive)
     {
         unsigned int screenWidth, screenHeight;
         Window::activeWindow->GetSize(&screenWidth, &screenHeight);
-        auto projection = glm::perspective(glm::radians(_camera->Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+        auto projection = glm::perspective(glm::radians(_camera->Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 200.0f);
         
         Shader::UpdateProjectionMatrix(projection);
         Shader::UpdateViewMatrix(_camera->GetViewMatrix());

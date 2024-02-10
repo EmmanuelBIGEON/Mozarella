@@ -26,7 +26,7 @@ class Simple3DView : public View
 
         void EnableBackground();
         
-        // do not work for now
+        // doesn't work for now
         void SetBackgroundTexture(Texture* texture);
 
         void SetContext(const std::shared_ptr<GraphicContext>& pContext);

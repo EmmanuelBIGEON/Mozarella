@@ -17,6 +17,7 @@ Shader* Shader::shader_material = nullptr;
 Shader* Shader::shader_light = nullptr;
 Shader* Shader::shader_simplemesh = nullptr;
 Shader* Shader::shader_mesh = nullptr;
+Shader* Shader::shader_depth = nullptr;
 Shader* Shader::shader_background = nullptr;
 Shader* Shader::shader_sphere_test = nullptr;
 
@@ -150,6 +151,7 @@ void Shader::InitShaders()
     shader_light = new Shader("shaders/light.vs", "shaders/light.fs");
     shader_simplemesh = new Shader("shaders/simplemesh.vs", "shaders/simplemesh.fs");
     shader_mesh = new Shader("shaders/mesh.vs", "shaders/mesh.fs");
+    shader_depth = new Shader("shaders/depth.vs", "shaders/depth.fs");
     shader_background = new Shader("shaders/background.vs", "shaders/background.fs");
     shader_sphere_test = new Shader("shaders/spheretest.vs", "shaders/spheretest.fs");
 }
@@ -168,6 +170,8 @@ Shader* Shader::GetShader(ShaderID shader)
             return shader_simplemesh;
         case SHADER_MESH:
             return shader_mesh;
+        case SHADER_DEPTH:
+            return shader_depth;
         case SHADER_BACKGROUND:
             return shader_background;
         case SHADER_SPHERE_TEST:
@@ -204,6 +208,11 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
     {
         shader_mesh->Use();
         shader_mesh->SetMat4("projection", projectionMatrix);
+    }
+    if (shader_depth != nullptr)
+    {
+        shader_depth->Use();
+        shader_depth->SetMat4("projection", projectionMatrix);
     }
     
     if (shader_sphere_test != nullptr)
@@ -243,6 +252,12 @@ void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
     {
         shader_mesh->Use();
         shader_mesh->SetMat4("view", viewMatrix);
+    }
+    
+    if (shader_depth != nullptr)
+    {
+        shader_depth->Use();
+        shader_depth->SetMat4("view", viewMatrix);
     }
     
     if (shader_sphere_test != nullptr)

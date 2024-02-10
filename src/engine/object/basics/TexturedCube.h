@@ -13,6 +13,11 @@ class TexturedCube : public GraphicObject
 
         void ToggleRotation();
         void SetTextureID(assets::Texture textureName);
+
+        void ApplyScale(float scale);
+
+        void EnableStencilMode();
+
         virtual void Compute() override;
         virtual void Render() override;
 
@@ -24,6 +29,9 @@ class TexturedCube : public GraphicObject
 
         bool _computed;
         bool _rotating;
+        bool _stencilMode;
+
+        float _scale;
 
         unsigned int _VAO, _VBO;
         float* _vertices;

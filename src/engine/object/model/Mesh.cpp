@@ -7,6 +7,7 @@
 
 Mesh::Mesh() : GraphicObject(), _VAO(0), _VBO(0), _EBO(0), _computed(false)
 {
+    _shader = Shader::GetShader(SHADER_MATERIAL);
 }
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures) :
@@ -15,10 +16,16 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     _indices = std::move(indices);
     _vertices = std::move(vertices);
     _textures = std::move(textures);
+    _shader = Shader::GetShader(SHADER_MATERIAL);
 }
 
 Mesh::~Mesh()
 {
+}
+
+void Mesh::SetShader(Shader* shader)
+{
+    _shader = shader;   
 }
 
 void Mesh::Compute()
@@ -55,14 +62,12 @@ void Mesh::Compute()
 
 void Mesh::Render()
 {
-    auto shader = Shader::GetShader(ShaderID::SHADER_MATERIAL);
-    shader->Use();
     glBindVertexArray(_VAO);
     for(unsigned int i = 0; i < _textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0); 
         std::string name = _textures[i]->type;
-        shader->SetInt(("material." + name).c_str(), i);
+        _shader->SetInt(("material." + name).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, _textures[i]->ID);
     }
     glActiveTexture(GL_TEXTURE0);

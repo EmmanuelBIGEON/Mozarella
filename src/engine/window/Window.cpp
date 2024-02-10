@@ -68,6 +68,9 @@ Window::Window(const std::string& windowName, unsigned int width, unsigned int h
     glEnable(GL_MULTISAMPLE);  
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
     Shader::InitShaders();
     Assets::LoadAssets(AssetType::AssetType_All);

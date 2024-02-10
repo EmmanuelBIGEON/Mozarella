@@ -4,7 +4,7 @@
 #include <glm/ext.hpp>
 
 #include "GraphicObject.h"
-
+#include "Shader.h"
 #include "Texture.h"
 
 struct Vertex {
@@ -19,6 +19,8 @@ class Mesh : public GraphicObject
         Mesh(); // inutile pour le moment.
         Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture*> textures);
         virtual ~Mesh();
+
+        void SetShader(Shader* shader);
         
         virtual void Compute() override;
         virtual void Render() override;
@@ -30,5 +32,7 @@ class Mesh : public GraphicObject
         unsigned int _VAO, _VBO, _EBO;
 
         bool _computed;
+        
+        Shader* _shader;
 
 };  

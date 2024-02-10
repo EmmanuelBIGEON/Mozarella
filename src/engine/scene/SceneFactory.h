@@ -15,4 +15,5 @@ class SceneFactory
         static Scene* CreateLightScene();
         static Scene* CreateSphereScene();
         static Scene* CreateEditScene();
+        static Scene* CreateStencilScene();
 };
