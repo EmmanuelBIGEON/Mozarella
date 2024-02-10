@@ -5,13 +5,13 @@
 
 
 ColoredCube::ColoredCube(const glm::vec3& position, const glm::vec3& color)
-    : GraphicObject(), _position(position), _color(color), _model(1.0f), _colourGroup(nullptr), _width(2.0f), 
+    : GraphicObject(position), _color(color), _model(1.0f), _colourGroup(nullptr), _width(2.0f), 
     _computed(false), _vertices(nullptr), _VAO(0), _VBO(0)
 {
 }
 
 ColoredCube::ColoredCube(const glm::vec3& position, float width, const glm::vec3& color)
-    : GraphicObject(), _position(position), _color(color), _width(width), _model(1.0f), _colourGroup(nullptr), 
+    : GraphicObject(position), _color(color), _width(width), _model(1.0f), _colourGroup(nullptr), 
     _computed(false), _vertices(nullptr)
 {
 }

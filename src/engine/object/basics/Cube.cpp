@@ -5,19 +5,24 @@
 
 
 Cube::Cube(const glm::vec3& position, const glm::vec3& color)
-    : GraphicObject(), _position(position), _color(color), _model(1.0f), _width(2.0f), 
+    : GraphicObject(position), _color(color), _model(1.0f), _width(2.0f), _alpha(1.0f),
     _computed(false), _vertices(nullptr), _VAO(0), _VBO(0), _colourGroup(nullptr)
 {
 }
 
 Cube::Cube(const glm::vec3& position, float width, const glm::vec3& color)
-    : GraphicObject(), _position(position), _color(color), _model(1.0f),  _width(2.0f), 
+    : GraphicObject(position), _color(color), _model(1.0f),  _width(2.0f), _alpha(1.0f),
     _computed(false), _vertices(nullptr), _VAO(0), _VBO(0), _colourGroup(nullptr)
 {
 }
 
 Cube::~Cube()
 {
+}
+
+void Cube::SetTransparency(float alpha)
+{
+    _alpha = alpha;
 }
 
 void Cube::Assign(ColourGroup* colourGroup)
@@ -104,9 +109,9 @@ void Cube::Render()
 
     shader->SetMat4("model", _model);
     if(_colourGroup)
-        shader->SetVec3("objectColor", _colourGroup->color);
+        shader->SetVec4("objectColor", {_colourGroup->color, _alpha});
     else 
-        shader->SetVec3("objectColor", _color);
+        shader->SetVec4("objectColor", {_color, _alpha});
         
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

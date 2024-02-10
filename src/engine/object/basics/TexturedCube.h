@@ -22,7 +22,6 @@ class TexturedCube : public GraphicObject
         virtual void Render() override;
 
     private:
-        glm::vec3 _position;
         glm::mat4 _model;
 
         assets::Texture _textureName;

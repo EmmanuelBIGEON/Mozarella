@@ -9,7 +9,7 @@
 #include "stb_image.h"
 
 
-TexturedCube::TexturedCube(const glm::vec3& position) : GraphicObject(), _position(position),
+TexturedCube::TexturedCube(const glm::vec3& position) : GraphicObject(position),
 _computed(false), _VAO(0), _VBO(0), _texture(0), _rotating(false) , _vertices(nullptr), _scale(1.0f), _stencilMode(false)
 {
     _textureName = assets::Texture::Texture_Cube;
@@ -155,15 +155,18 @@ void TexturedCube::Render()
 
         auto shader = Shader::GetShader(SHADER_SIMPLEMESH);
         shader->Use();
-        auto model = glm::scale(_model, glm::vec3(_scale + 0.2f, _scale + 0.2f, _scale + 0.2f));
-
+        
         if(_rotating)
         {
             auto model = glm::rotate(_model, (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+            shader->SetMat4("model", model);
+        }else 
+        {
+            auto model = glm::scale(_model, glm::vec3(1.1f, 1.1f, 1.1f));
+            shader->SetMat4("model", model);
         }
-        shader->SetMat4("model", model);
-        
-        
+
         glDrawArrays(GL_TRIANGLES, 0, 36);
         
         glStencilMask(0xFF);

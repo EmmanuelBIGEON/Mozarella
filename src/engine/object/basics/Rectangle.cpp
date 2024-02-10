@@ -91,7 +91,7 @@ void Rectangle::Render()
     glActiveTexture(GL_TEXTURE0);
     if(_textureName != assets::Texture::Texture_None)
         Assets::Bind(_textureName, 0);
-    else 
+        
     _shader->SetMat4("model", _model);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }

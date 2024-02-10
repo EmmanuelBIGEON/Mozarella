@@ -9,6 +9,7 @@
 #include "SceneSphere.h"
 #include "SceneEdit.h"
 #include "SceneStencil.h"
+#include "SceneTransparency.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -60,5 +61,11 @@ Scene* SceneFactory::CreateEditScene()
 Scene* SceneFactory::CreateStencilScene()
 {
     auto scene = new SceneStencil();
+    return scene;
+}
+
+Scene* SceneFactory::CreateTransparencyScene()
+{
+    auto scene = new SceneTransparency();
     return scene;
 }

@@ -3,8 +3,8 @@
 #include "Shader.h"
 #include <glad/glad.h>
 
-LightSource::LightSource(const glm::vec3& position, const glm::vec3& color) : GraphicObject(), 
-    _position(position), _color(color), _model(1.0f), _width(0.8f), 
+LightSource::LightSource(const glm::vec3& position, const glm::vec3& color) : GraphicObject(position), 
+    _color(color), _model(1.0f), _width(0.8f), 
     _computed(false), _vertices(nullptr), _VAO(0), _VBO(0)
 {
 }
@@ -23,11 +23,6 @@ void LightSource::SetWidth(float width)
 glm::vec3& LightSource::Color()
 {
     return _color;
-}
-
-glm::vec3& LightSource::Position()
-{
-    return _position;
 }
 
 void LightSource::Compute()

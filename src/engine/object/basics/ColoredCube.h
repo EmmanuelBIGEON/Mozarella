@@ -20,7 +20,6 @@ class ColoredCube : public GraphicObject
         virtual void Render() override;
 
     private:
-        glm::vec3 _position;
         glm::vec3 _color;
         ColourGroup* _colourGroup;
         

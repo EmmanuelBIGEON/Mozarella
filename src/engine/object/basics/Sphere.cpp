@@ -5,7 +5,7 @@
 
 #include <glad/glad.h>
 
-Sphere::Sphere(const glm::vec3& position, unsigned int subdivisionCount) : GraphicObject(), _position(position), _computed(false),
+Sphere::Sphere(const glm::vec3& position, unsigned int subdivisionCount) : GraphicObject(position), _computed(false),
  _VAO(0), _VBO(0), _EBO(0), _wireframe(false), _subdivisionCount(subdivisionCount)
 {            
 }

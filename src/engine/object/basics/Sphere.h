@@ -16,8 +16,6 @@ class Sphere : public GraphicObject
         virtual void Compute() override;
         virtual void Render() override;
     private: 
-    
-        glm::vec3 _position;
         unsigned int _VAO, _VBO, _EBO;
         std::vector<float> _vertices;
         bool _computed;
