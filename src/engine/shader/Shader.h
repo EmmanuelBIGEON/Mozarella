@@ -11,7 +11,9 @@ enum ShaderID
     SHADER_MESH,
     SHADER_DEPTH,
     SHADER_BACKGROUND,
-    SHADER_SPHERE_TEST
+    SHADER_SPHERE_TEST,
+    SHADER_SCREEN,
+    SHADER_SKYBOX
 };
 
 class Shader
@@ -50,5 +52,7 @@ class Shader
         static Shader* shader_depth;
         static Shader* shader_background;
         static Shader* shader_sphere_test;
+        static Shader* shader_screen;
+        static Shader* shader_skybox;
 
 };

@@ -10,6 +10,8 @@
 #include "SceneEdit.h"
 #include "SceneStencil.h"
 #include "SceneTransparency.h"
+#include "SceneFramebuffer.h"
+#include "SceneCubemap.h"
 
 Scene* SceneFactory::CreateDefaultScene()
 {
@@ -67,5 +69,17 @@ Scene* SceneFactory::CreateStencilScene()
 Scene* SceneFactory::CreateTransparencyScene()
 {
     auto scene = new SceneTransparency();
+    return scene;
+}
+
+Scene* SceneFactory::CreateFramebufferScene()
+{
+    auto scene = new SceneFramebuffer();
+    return scene;
+}
+
+Scene* SceneFactory::CreateCubemapScene()
+{
+    auto scene = new SceneCubemap();
     return scene;
 }

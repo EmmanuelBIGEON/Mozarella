@@ -1,6 +1,12 @@
 #include "Assets.h"
 
 #include <iostream>
+#include <vector>
+#include <string> 
+
+#include <glad/glad.h>
+
+#include "TextureLoader.h"
 
 std::unordered_map<assets::Texture, Texture*> Assets::mapTextures = {};
 
@@ -33,6 +39,7 @@ bool Assets::LoadAssets(AssetType type)
 }
 void Assets::Bind(assets::Texture textureName, unsigned int slot)
 {
+    glActiveTexture(GL_TEXTURE0 + slot);
     mapTextures[textureName]->Bind(slot);
 }
 
@@ -48,6 +55,7 @@ bool Assets::LoadTextures()
         std::cout << "Warning : Textures already loaded" << std::endl;
         return false;
     }
+    TextureLoader loader;
 
     mapTextures[assets::Texture::Texture_None] = nullptr;
     mapTextures[assets::Texture::Texture_Cube] = Texture::Load(BuildTexturePath("awesomeface.png"));
@@ -55,4 +63,19 @@ bool Assets::LoadTextures()
     mapTextures[assets::Texture::Texture_Cube3] = Texture::Load(BuildTexturePath("oldwood-min.jpg"));
     mapTextures[assets::Texture::Texture_Plane] = Texture::Load(BuildTexturePath("oldwood-min.jpg"));
     mapTextures[assets::Texture::Texture_Background] = Texture::Load(BuildTexturePath("background-min.png"));
+    mapTextures[assets::Texture::Texture_Woodfloor] = Texture::Load(BuildTexturePath("wood.png"));
+
+    // load skybox.
+    {    
+        std::vector<std::string> filepaths
+        {
+            BuildTexturePath("skybox/right.jpg"),
+            BuildTexturePath("skybox/left.jpg"),
+            BuildTexturePath("skybox/top.jpg"),
+            BuildTexturePath("skybox/bottom.jpg"),
+            BuildTexturePath("skybox/front.jpg"),
+            BuildTexturePath("skybox/back.jpg")
+        };
+        mapTextures[assets::Texture::Texture_Skybox] = loader.LoadCubemap(filepaths, "Skybox");
+    }
 }

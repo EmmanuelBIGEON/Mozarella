@@ -22,6 +22,7 @@ SceneCamera::SceneCamera()
     glm::vec3 p3 = glm::vec3(-10.0f, -1.0f, -10.0f);
     glm::vec3 p4 = glm::vec3(10.0f, -1.0f, -10.0f);
     auto plane = ObjectFactory::CreateRectangle(p1, p2,  p3, p4);
+    plane->SetTextureID(assets::Texture::Texture_Woodfloor);
     context->AddObject(plane);
 
 

@@ -56,11 +56,11 @@ void Rectangle::Compute()
     // 1 2 3 - 1 3 4
     _vertices = new float[30] {
         _p1.x, _p1.y, _p1.z,  0.0f, 0.0f,
-        _p2.x, _p2.y, _p2.z,  1.0f, 0.0f,
-        _p3.x, _p3.y, _p3.z,  1.0f, 1.0f,
+        _p2.x, _p2.y, _p2.z,  4.0f, 0.0f,
+        _p3.x, _p3.y, _p3.z,  4.0f, 4.0f,
         _p1.x, _p1.y, _p1.z,  0.0f, 0.0f,
-        _p3.x, _p3.y, _p3.z,  1.0f, 1.0f,
-        _p4.x, _p4.y, _p4.z,  0.0f, 1.0f,
+        _p3.x, _p3.y, _p3.z,  4.0f, 4.0f,
+        _p4.x, _p4.y, _p4.z,  0.0f, 4.0f,
     };
     
     glGenVertexArrays(1, &_VAO);
@@ -91,7 +91,7 @@ void Rectangle::Render()
     glActiveTexture(GL_TEXTURE0);
     if(_textureName != assets::Texture::Texture_None)
         Assets::Bind(_textureName, 0);
-        
+
     _shader->SetMat4("model", _model);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }

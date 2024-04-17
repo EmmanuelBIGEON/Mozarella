@@ -42,6 +42,7 @@ void SceneMesh::Process(Event& event)
 void SceneMesh::Render()
 {
     
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     // be sure to activate shader when setting uniforms/drawing objects
     auto shader = Shader::GetShader(SHADER_MATERIAL);
     shader->Use();

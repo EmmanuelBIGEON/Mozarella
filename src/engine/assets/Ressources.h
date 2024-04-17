@@ -9,6 +9,8 @@ namespace assets
         Texture_Cube2,
         Texture_Cube3,
         Texture_Plane,
-        Texture_Background
+        Texture_Background,
+        Texture_Skybox,
+        Texture_Woodfloor
     };
 };

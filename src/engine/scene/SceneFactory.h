@@ -17,4 +17,6 @@ class SceneFactory
         static Scene* CreateEditScene();
         static Scene* CreateStencilScene();
         static Scene* CreateTransparencyScene();
+        static Scene* CreateFramebufferScene();
+        static Scene* CreateCubemapScene();
 };

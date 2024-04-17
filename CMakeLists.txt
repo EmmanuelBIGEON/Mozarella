@@ -50,6 +50,8 @@ set(SRCS
     src/engine/scene/implementations/concepts/SceneEdit.cpp 
     src/engine/scene/implementations/concepts/SceneStencil.cpp 
     src/engine/scene/implementations/concepts/SceneTransparency.cpp 
+    src/engine/scene/implementations/concepts/SceneFramebuffer.cpp 
+    src/engine/scene/implementations/concepts/SceneCubemap.cpp 
 
     src/engine/view/View.cpp 
     src/engine/view/Camera.cpp 

@@ -20,6 +20,8 @@ Shader* Shader::shader_mesh = nullptr;
 Shader* Shader::shader_depth = nullptr;
 Shader* Shader::shader_background = nullptr;
 Shader* Shader::shader_sphere_test = nullptr;
+Shader* Shader::shader_screen = nullptr;
+Shader* Shader::shader_skybox = nullptr;
 
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
@@ -154,6 +156,8 @@ void Shader::InitShaders()
     shader_depth = new Shader("shaders/depth.vs", "shaders/depth.fs");
     shader_background = new Shader("shaders/background.vs", "shaders/background.fs");
     shader_sphere_test = new Shader("shaders/spheretest.vs", "shaders/spheretest.fs");
+    shader_screen = new Shader("shaders/screen.vs", "shaders/screen.fs");
+    shader_skybox = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
 }
 
 Shader* Shader::GetShader(ShaderID shader)
@@ -176,6 +180,10 @@ Shader* Shader::GetShader(ShaderID shader)
             return shader_background;
         case SHADER_SPHERE_TEST:
             return shader_sphere_test;
+        case SHADER_SCREEN:
+            return shader_screen;
+        case SHADER_SKYBOX:
+            return shader_skybox;
         default:
             throw new std::runtime_error("Couldn't find shader.");
             return nullptr;
@@ -219,6 +227,12 @@ void Shader::UpdateProjectionMatrix(const glm::mat4& projectionMatrix)
     {
         shader_sphere_test->Use();
         shader_sphere_test->SetMat4("projection", projectionMatrix);
+    }
+    
+    if (shader_skybox != nullptr)
+    {
+        shader_skybox->Use();
+        shader_skybox->SetMat4("projection", projectionMatrix);
     }
 }
 
@@ -264,5 +278,11 @@ void Shader::UpdateViewMatrix(const glm::mat4& viewMatrix)
     {
         shader_sphere_test->Use();
         shader_sphere_test->SetMat4("view", viewMatrix);
+    }
+    
+    if (shader_skybox != nullptr)
+    {
+        shader_skybox->Use();
+        shader_skybox->SetMat4("view", glm::mat4(glm::mat3(viewMatrix)));
     }
 }
