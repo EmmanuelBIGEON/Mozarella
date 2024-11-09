@@ -39,7 +39,7 @@ bool Simple3DView::Render()
     glStencilMask(0xFF); // safety
     
     
-    if (_backgroundActive)
+    if (_backgroundActive && 0)
     {
         glDepthMask(GL_FALSE);  
 

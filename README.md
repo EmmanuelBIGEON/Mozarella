@@ -2,6 +2,9 @@
 
 **C++ 3D Engine**
 [1 week project built for fun]
+The name mozarella sounded cool. So i picked it, that simple.
+
+![Preview Mozarella](mozarella-min.png)
 
 --------------
 
